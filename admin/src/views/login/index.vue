@@ -8,6 +8,10 @@
       autocomplete="on"
       label-position="left"
     >
+      <div class="title-container">
+        <h3 class="title">斐丹丝后台管理系统</h3>
+      </div>
+
       <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon name="user" />
@@ -15,57 +19,39 @@
         <el-input
           ref="username"
           v-model="loginForm.username"
-          placeholder="用户名"
           name="username"
           type="text"
-          tabindex="1"
           autocomplete="on"
+          placeholder="username"
         />
       </el-form-item>
 
-      <el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
-        <el-form-item prop="password">
-          <span class="svg-container">
-            <svg-icon name="password" />
-          </span>
-          <el-input
-            :key="passwordType"
-            ref="password"
-            v-model="loginForm.password"
-            :type="passwordType"
-            placeholder="密码"
-            name="password"
-            tabindex="2"
-            autocomplete="on"
-            @keyup.native="checkCapslock"
-            @blur="capsTooltip = false"
-            @keyup.enter.native="handleLogin"
-          />
-          <span class="show-pwd" @click="showPwd">
-            <svg-icon :name="passwordType === 'password' ? 'eye-off' : 'eye-on'" />
-          </span>
-        </el-form-item>
-      </el-tooltip>
+      <el-form-item prop="password">
+        <span class="svg-container">
+          <svg-icon name="password" />
+        </span>
+        <el-input
+          :key="passwordType"
+          ref="password"
+          v-model="loginForm.password"
+          :type="passwordType"
+          placeholder="password"
+          name="password"
+          autocomplete="on"
+          @keyup.enter.native="handleLogin"
+        />
+        <span class="show-pwd" @click="showPwd">
+          <svg-icon :name="passwordType === 'password' ? 'eye-off' : 'eye-on'" />
+        </span>
+      </el-form-item>
 
       <el-button
         :loading="loading"
         type="primary"
         style="width:100%; margin-bottom:30px;"
         @click.native.prevent="handleLogin"
-      >登录</el-button>
-
-      <div style="position:relative">
-        <el-button class="thirdparty-button" type="primary" @click="showDialog=true">第三方登录</el-button>
-      </div>
+      >Sign in</el-button>
     </el-form>
-
-    <el-dialog title="第三方登录" :visible.sync="showDialog">
-      第三方登录
-      <br />
-      <br />
-      <br />
-      <social-sign />
-    </el-dialog>
   </div>
 </template>
 
@@ -76,13 +62,9 @@ import { Dictionary } from 'vue-router/types/router'
 import { Form as ElForm, Input } from 'element-ui'
 import { UserModule } from '@/store/modules/user'
 import { isValidUsername } from '@/utils/validate'
-import SocialSign from './components/SocialSignin.vue'
 
 @Component({
-  name: 'Login',
-  components: {
-    SocialSign
-  }
+  name: 'Login'
 })
 export default class extends Vue {
   private validateUsername = (rule: any, value: string, callback: Function) => {
@@ -114,7 +96,6 @@ export default class extends Vue {
   private passwordType = 'password'
   private loading = false
   private showDialog = false
-  private capsTooltip = false
   private redirect?: string
   private otherQuery: Dictionary<string> = {}
 
@@ -137,11 +118,6 @@ export default class extends Vue {
     }
   }
 
-  private checkCapslock(e: KeyboardEvent) {
-    const { key } = e
-    this.capsTooltip = key !== null && key.length === 1 && (key >= 'A' && key <= 'Z')
-  }
-
   private showPwd() {
     if(this.passwordType === 'password') {
       this.passwordType = ''
@@ -159,10 +135,8 @@ export default class extends Vue {
         this.loading = true
         await UserModule.Login(this.loginForm)
         this.$router.push({
-          path: this.redirect || '/',
+          path: '/',
           query: this.otherQuery
-        }).catch(err => {
-          console.warn(err)
         })
         // Just to simulate the time of the request
         setTimeout(() => {
@@ -276,15 +250,6 @@ export default class extends Vue {
       text-align: center;
       font-weight: bold;
     }
-
-    .set-language {
-      color: #fff;
-      position: absolute;
-      top: 3px;
-      font-size: 18px;
-      right: 0px;
-      cursor: pointer;
-    }
   }
 
   .show-pwd {
@@ -295,18 +260,6 @@ export default class extends Vue {
     color: $darkGray;
     cursor: pointer;
     user-select: none;
-  }
-
-  .thirdparty-button {
-    position: absolute;
-    right: 0;
-    bottom: 6px;
-  }
-
-  @media only screen and (max-width: 470px) {
-    .thirdparty-button {
-      display: none;
-    }
   }
 }
 </style>

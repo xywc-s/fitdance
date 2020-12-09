@@ -1,14 +1,13 @@
-<!--
- * @Description: 
- * @Author: xywc_s
- * @Date: 2020-12-02 17:17:13
--->
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name:{{ name }}</div>
     <div class="dashboard-text">
-      roles:
-      <span v-for="role in roles" :key="role">{{ role }}</span>
+      name:{{ name }}
+    </div>
+    <div class="dashboard-text">
+      roles:<span
+        v-for="role in roles"
+        :key="role"
+      >{{ role }}</span>
     </div>
   </div>
 </template>

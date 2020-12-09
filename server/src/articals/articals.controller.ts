@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put, Query } from '@nestjs/common';
 import { CrudController } from '@nestjsx/crud';
 import { getRepository } from 'typeorm';
 import { Artical } from './../models/artical';
@@ -30,9 +30,9 @@ export class ArticalsController implements CrudController<Artical> {
   }
 
   @Post('/')
-  async saveOne(@Param() params){
+  async saveOne(@Body() params){
     const repo = getRepository(Artical)
-    const artical = await repo.create(params)
+    const artical = repo.create(params)
     const res = await repo.save(artical)
     return {
       code: 20000,

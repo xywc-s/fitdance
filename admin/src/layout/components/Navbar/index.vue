@@ -8,27 +8,17 @@
     />
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
     <div class="right-menu">
-      <template v-if="device!=='mobile'">
-        <header-search class="right-menu-item" />
-        <error-log class="errLog-container right-menu-item hover-effect" />
-        <el-tooltip content="尺寸" effect="dark" placement="bottom">
-          <size-select class="right-menu-item hover-effect" />
-        </el-tooltip>
-      </template>
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
           <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar" />
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
-          <router-link to="/profile/">
-            <el-dropdown-item>个人中心</el-dropdown-item>
-          </router-link>
           <router-link to="/">
-            <el-dropdown-item>仪表板</el-dropdown-item>
+            <el-dropdown-item>Home</el-dropdown-item>
           </router-link>
-          <el-dropdown-item divided @click.native="logout">
-            <span style="display:block;">注销</span>
+          <el-dropdown-item divided>
+            <span style="display:block;" @click="logout">LogOut</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -41,19 +31,13 @@ import { Component, Vue } from 'vue-property-decorator'
 import { AppModule } from '@/store/modules/app'
 import { UserModule } from '@/store/modules/user'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
-import ErrorLog from '@/components/ErrorLog/index.vue'
 import Hamburger from '@/components/Hamburger/index.vue'
-import HeaderSearch from '@/components/HeaderSearch/index.vue'
-import SizeSelect from '@/components/SizeSelect/index.vue'
 
 @Component({
   name: 'Navbar',
   components: {
     Breadcrumb,
-    ErrorLog,
-    Hamburger,
-    HeaderSearch,
-    SizeSelect
+    Hamburger
   }
 })
 export default class extends Vue {
@@ -75,9 +59,7 @@ export default class extends Vue {
 
   private async logout() {
     await UserModule.LogOut()
-    this.$router.push(`/login?redirect=${this.$route.fullPath}`).catch(err => {
-      console.warn(err)
-    })
+    this.$router.push(`/login?redirect=${this.$route.fullPath}`)
   }
 }
 </script>
@@ -106,11 +88,6 @@ export default class extends Vue {
 
   .breadcrumb-container {
     float: left;
-  }
-
-  .errLog-container {
-    display: inline-block;
-    vertical-align: top;
   }
 
   .right-menu {

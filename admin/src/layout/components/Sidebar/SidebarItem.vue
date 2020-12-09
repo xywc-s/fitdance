@@ -1,26 +1,42 @@
 <template>
   <div
     v-if="!item.meta || !item.meta.hidden"
-    :class="[isCollapse ? 'simple-mode' : 'full-mode', {'first-level': isFirstLevel}]"
+    :class="['menu-wrapper', isCollapse ? 'simple-mode' : 'full-mode', {'first-level': isFirstLevel}]"
   >
-    <template v-if="!alwaysShowRootMenu && theOnlyOneChild && !theOnlyOneChild.children">
-      <sidebar-item-link v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
+    <template v-if="theOnlyOneChild && !theOnlyOneChild.children">
+      <sidebar-item-link
+        v-if="theOnlyOneChild.meta"
+        :to="resolvePath(theOnlyOneChild.path)"
+      >
         <el-menu-item
           :index="resolvePath(theOnlyOneChild.path)"
           :class="{'submenu-title-noDropdown': isFirstLevel}"
         >
-          <svg-icon v-if="theOnlyOneChild.meta.icon" :name="theOnlyOneChild.meta.icon" />
+          <svg-icon
+            v-if="theOnlyOneChild.meta.icon"
+            :name="theOnlyOneChild.meta.icon"
+          />
           <span
             v-if="theOnlyOneChild.meta.title"
             slot="title"
-          >{{ $t('route.' + theOnlyOneChild.meta.title) }}</span>
+          >{{ theOnlyOneChild.meta.title }}</span>
         </el-menu-item>
       </sidebar-item-link>
     </template>
-    <el-submenu v-else :index="resolvePath(item.path)" popper-append-to-body>
+    <el-submenu
+      v-else
+      :index="resolvePath(item.path)"
+      popper-append-to-body
+    >
       <template slot="title">
-        <svg-icon v-if="item.meta && item.meta.icon" :name="item.meta.icon" />
-        <span v-if="item.meta && item.meta.title" slot="title">{{ $t('route.' + item.meta.title) }}</span>
+        <svg-icon
+          v-if="item.meta && item.meta.icon"
+          :name="item.meta.icon"
+        />
+        <span
+          v-if="item.meta && item.meta.title"
+          slot="title"
+        >{{ item.meta.title }}</span>
       </template>
       <template v-if="item.children">
         <sidebar-item
@@ -58,17 +74,10 @@ export default class extends Vue {
   @Prop({ default: true }) private isFirstLevel!: boolean
   @Prop({ default: '' }) private basePath!: string
 
-  get alwaysShowRootMenu() {
-    if(this.item.meta && this.item.meta.alwaysShow) {
-      return true
-    }
-    return false
-  }
-
   get showingChildNumber() {
-    if(this.item.children) {
+    if (this.item.children) {
       const showingChildren = this.item.children.filter((item) => {
-        if(item.meta && item.meta.hidden) {
+        if (item.meta && item.meta.hidden) {
           return false
         } else {
           return true
@@ -80,12 +89,12 @@ export default class extends Vue {
   }
 
   get theOnlyOneChild() {
-    if(this.showingChildNumber > 1) {
+    if (this.showingChildNumber > 1) {
       return null
     }
-    if(this.item.children) {
-      for(const child of this.item.children) {
-        if(!child.meta || !child.meta.hidden) {
+    if (this.item.children) {
+      for (const child of this.item.children) {
+        if (!child.meta || !child.meta.hidden) {
           return child
         }
       }
@@ -96,10 +105,10 @@ export default class extends Vue {
   }
 
   private resolvePath(routePath: string) {
-    if(isExternal(routePath)) {
+    if (isExternal(routePath)) {
       return routePath
     }
-    if(isExternal(this.basePath)) {
+    if (isExternal(this.basePath)) {
       return this.basePath
     }
     return path.resolve(this.basePath, routePath)
@@ -113,7 +122,7 @@ export default class extends Vue {
 }
 
 .full-mode {
-  .nest-menu .el-submenu > .el-submenu__title,
+  .nest-menu .el-submenu>.el-submenu__title,
   .el-submenu .el-menu-item {
     min-width: $sideBarWidth !important;
     background-color: $subMenuBg !important;
@@ -138,14 +147,14 @@ export default class extends Vue {
     .el-submenu {
       overflow: hidden;
 
-      & > .el-submenu__title {
+      &>.el-submenu__title {
         padding: 0px !important;
 
         .el-submenu__icon-arrow {
           display: none;
         }
 
-        & > span {
+        &>span {
           visibility: hidden;
         }
       }

@@ -1,8 +1,3 @@
-/*
- * @Description: 
- * @Author: xywc_s
- * @Date: 2020-12-02 17:15:44
- */
 interface ISettings {
   title: string // Overrides the default title
   showSettings: boolean // Controls settings panel display
@@ -17,7 +12,7 @@ interface ISettings {
 
 // You can customize below settings :)
 const settings: ISettings = {
-  title: 'Fitdance 斐丹丝',
+  title: 'Fitdance - 斐丹丝',
   showSettings: true,
   showTagsView: true,
   fixedHeader: false,

@@ -1,29 +1,13 @@
-/*
- * @Description: 
- * @Author: xywc_s
- * @Date: 2020-12-02 17:16:16
- */
-import { PermissionModule } from '@/store/modules/permission'
 import { UserModule } from '@/store/modules/user'
 import { Message } from 'element-ui'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { Route } from 'vue-router'
 import router from './router'
-import settings from './settings'
 
 NProgress.configure({ showSpinner: false })
 
-const whiteList = ['/login', '/auth-redirect']
-
-const getPageTitle = (key: string) => {
-  // const hasKey = i18n.te(`route.${key}`)
-  // if (hasKey) {
-  //   const pageName = i18n.t(`route.${key}`)
-  //   return `${pageName} - ${settings.title}`
-  // }
-  return `${settings.title}`
-}
+const whiteList = ['/login']
 
 router.beforeEach(async(to: Route, _: Route, next: any) => {
   // Start progress bar
@@ -39,16 +23,8 @@ router.beforeEach(async(to: Route, _: Route, next: any) => {
       // Check whether the user has obtained his permission roles
       if (UserModule.roles.length === 0) {
         try {
-          // Note: roles must be a object array! such as: ['admin'] or ['developer', 'editor']
-          //TODO: 用户信息获取接口
-          // await UserModule.GetUserInfo()
-          // const roles = UserModule.roles
-          const roles = ['admin']
-          // Generate accessible routes map based on role
-          PermissionModule.GenerateRoutes(roles)
-          // Dynamically add accessible routes
-          router.addRoutes(PermissionModule.dynamicRoutes)
-          // Hack: ensure addRoutes is complete
+          // Get user info, including roles
+          await UserModule.GetUserInfo()
           // Set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true })
         } catch (err) {
@@ -77,9 +53,8 @@ router.beforeEach(async(to: Route, _: Route, next: any) => {
 
 router.afterEach((to: Route) => {
   // Finish progress bar
-  // hack: https://github.com/PanJiaChen/vue-element-admin/pull/2939
   NProgress.done()
 
   // set page title
-  document.title = getPageTitle(to.meta.title)
+  document.title = to.meta.title || 'Fitdance - 斐丹丝'
 })

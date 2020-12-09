@@ -1,17 +1,8 @@
-<!--
- * @Description: 
- * @Author: xywc_s
- * @Date: 2020-12-02 18:21:21
--->
 <template>
   <el-breadcrumb class="app-breadcrumb" separator="/">
     <transition-group name="breadcrumb">
-      <el-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="item.path">
-        <span
-          v-if="item.redirect === 'noredirect' || index === breadcrumbs.length-1"
-          class="no-redirect"
-        >{{ item.meta.title }}</span>
-        <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
+      <el-breadcrumb-item v-for="item in breadcrumbs" :key="item.path">
+        <span>{{ item.meta.title }}</span>
       </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>
@@ -26,7 +17,7 @@ import { RouteRecord, Route } from 'vue-router'
   name: 'Breadcrumb'
 })
 export default class extends Vue {
-  private breadcrumbs: RouteRecord[] = []
+  private breadcrumbs: RouteRecord[] = [];
 
   @Watch('$route')
   private onRouteChange(route: Route) {
@@ -42,22 +33,17 @@ export default class extends Vue {
   }
 
   private getBreadcrumb() {
-    let matched = this.$route.matched.filter((item) => item.meta && item.meta.title)
-    const first = matched[0]
-    if(!this.isDashboard(first)) {
-      matched = [{ path: '/dashboard', meta: { title: 'dashboard' } } as RouteRecord].concat(matched)
-    }
-    this.breadcrumbs = matched.filter((item) => {
+    let matched = this.$route.matched.filter(
+      item => item.meta && item.meta.title
+    )
+    this.breadcrumbs = matched.filter(item => {
       return item.meta && item.meta.title && item.meta.breadcrumb !== false
     })
   }
 
   private isDashboard(route: RouteRecord) {
-    const name = route && route.name
-    if(!name) {
-      return false
-    }
-    return name.trim().toLocaleLowerCase() === 'Dashboard'.toLocaleLowerCase()
+    const name = route && route.meta && route.meta.title
+    return name === 'Dashboard'
   }
 
   private pathCompile(path: string) {
@@ -70,14 +56,10 @@ export default class extends Vue {
   private handleLink(item: any) {
     const { redirect, path } = item
     if(redirect) {
-      this.$router.push(redirect).catch(err => {
-        console.warn(err)
-      })
+      this.$router.push(redirect)
       return
     }
-    this.$router.push(this.pathCompile(path)).catch(err => {
-      console.warn(err)
-    })
+    this.$router.push(this.pathCompile(path))
   }
 }
 </script>

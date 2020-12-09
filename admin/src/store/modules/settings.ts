@@ -1,7 +1,7 @@
-import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators'
+import defaultSettings from '@/settings'
 import store from '@/store'
 import elementVariables from '@/styles/element-variables.scss'
-import defaultSettings from '@/settings'
+import { Action, getModule, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 
 export interface ISettingsState {
   theme: string
