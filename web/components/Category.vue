@@ -91,7 +91,7 @@ export default {
       background-color: #ffb74d;
     }
     .leftbottom {
-      background-color: #81c784;
+      background-color: $c-green;
     }
     .lefttop,
     .leftbottom {

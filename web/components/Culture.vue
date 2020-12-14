@@ -49,7 +49,7 @@ export default {
     .keyword {
       flex-basis: 20%;
       div {
-        background-color: green;
+        background-color: $c-green;
         border-top-left-radius: 5rem;
         border-bottom-left-radius: 5rem;
         padding: 6% 24px;
