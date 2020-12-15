@@ -1,8 +1,8 @@
 <template>
-  <v-row class="py-5">
+  <v-row>
     <v-col class="col-lg-7 col-md-9 col-sm-11 col-12 mx-auto">
-      <v-row class="d-flex justify-center align-center">
-        <v-img class="head-logo flex-grow-0" src="/logo.png"></v-img>
+      <v-row class="d-flex justify-center align-center my-6">
+        <v-img class="flex-grow-0" src="/logo.png" height="auto"></v-img>
         <v-row class="d-flex ml-auto flex-grow-0">
           <v-icon x-large>mdi-phone-outline</v-icon>
           <div>
@@ -10,7 +10,7 @@
             <h2>13708208599</h2>
           </div>
         </v-row>
-        <v-img class="head-logo flex-grow-0 ml-4" src="/logo.png"></v-img>
+        <v-img class="flex-grow-0 ml-4" src="/logo.png" height="auto"></v-img>
       </v-row>
       <v-list-item v-for="({title, path},index) in menus" :key="title" class="float-left">
         <nuxt-link :to="path">
@@ -52,10 +52,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.head-logo {
-  width: 160px;
-  height: 60px;
-}
-</style>

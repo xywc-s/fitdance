@@ -9,16 +9,5 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      fixed: true,
-    }
-  }
-}
+export default {}
 </script>
-<style lang="scss">
-.main-wrapper {
-  background-color: #fafafa;
-}
-</style>

@@ -44,39 +44,39 @@ export default {
       subtitle: 'class products',
       categories: [{
         name: '基础练功服',
-        path: '/category/liangongfu',
+        path: '/category/practice-clothes',
         level: 1,
         img: ''
       }, {
         name: '蓬蓬裙舞蹈服',
-        path: '/category/wudaofu',
+        path: '/category/dancing-dress',
         level: 2,
         img: ''
       }, {
         name: '芭蕾裙专区',
-        path: '/category/baleiqun',
+        path: '/category/ballet-skirt',
         level: 3,
         img: ''
       }, {
-        name: '披件外套',
-        path: '/category/waitao',
+        name: '披肩外套',
+        path: '/category/coat',
         level: 4,
-        img: '/logo.png'
+        img: '/category_1.png'
       }, {
         name: '舞蹈鞋',
-        path: '/category/xie',
+        path: '/category/shoes',
         level: 5,
-        img: '/logo.png'
+        img: '/category_2.png'
       }, {
         name: '舞蹈袜',
-        path: '/category/wa',
+        path: '/category/socks',
         level: 6,
-        img: '/logo.png'
+        img: '/category_3.png'
       }, {
         name: '舞蹈配饰',
-        path: '/category/peishi',
+        path: '/category/accessories',
         level: 7,
-        img: '/logo.png'
+        img: '/category_4.png'
       }]
     }
   }
