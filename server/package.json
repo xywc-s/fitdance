@@ -38,6 +38,7 @@
     "mongoose": "^5.10.18",
     "nestjs-typegoose": "^7.1.38",
     "pg": "^8.5.1",
+    "qiniu": "^7.3.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",

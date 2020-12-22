@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
 import { CrudController } from '@nestjsx/crud';
 import { FilesService } from 'src/files/files.service';
 import { getRepository } from 'typeorm';
@@ -13,51 +13,54 @@ export class FilesController implements CrudController<File> {
   }
 
   @Get('/')
-  async getArticals(@Query() query){
-    const {currentPage, pageSize} = query
-    const res = await File.findAndCount({
-      skip: (currentPage-1)*pageSize,
-      take: pageSize,
-      order: {
-        id: "DESC"
+  async getFiles(){
+    const repo = getRepository(File)
+    let res = await repo.query('select dir from file where deleted_at is null group by dir')
+    if(res.length > 0){
+      for(let index in res){
+        let item = res[index]
+        let files = await repo.find({'dir':item.dir});
+        res[index].files = files
       }
-    })
+    }
     return {
       code: 20000,
-      data: res[0],
-      total: res[1]
+      data: res
+    }
+  }
+
+  @Get('/token')
+  async getToken(){
+    const token = this.service.getUploadToken()
+    return {
+      code: 20000,
+      token
     }
   }
 
   @Post('/')
   async saveOne(@Body() params){
     const repo = getRepository(File)
-    const file = await repo.create(params)
-    const res = await repo.save(file)
+    let {dir,files} = params
+    files = this.service.serialize(files,dir)
+    const docs = await repo.create(files)
+    const res = await repo.save(docs)
     return {
       code: 20000,
+      message: '上传成功',
       data: res
     }
   }
 
-  @Put('/')
-  async updateOne(@Body() params){
-    const repo = getRepository(File)
-    const res = await repo.save(params)
-    return {
-      code: 20000,
-      data: res
-    }
-  }
 
   @Delete('/')
   async delOne(@Query('id') id) {
     const file = await File.findOne(id)
+    this.service.deleteResource(`${file.dir}/${file.filename}`)
     const res = await file.softRemove()
-    console.log(id);
-    console.log(res);
     return {
       code: 20000,
+      message: '删除成功',
       data: res
     }
   }
