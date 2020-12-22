@@ -1,132 +1,97 @@
 <template>
-  <div>
-    <header></header>
-    <avue-crud
-      :table-loading="loading"
-      :data="data"
-      :page.sync="page"
-      :option="option"
-      @on-load="listLoad"
-      @row-save="rowSave"
-      @row-update="rowUpdate"
-      @row-del="rowDel"
-      @refresh-change="refresh"
-    ></avue-crud>
+  <div class="pa-20" :loading="loading">
+    <header class="pb-20">
+      <el-row>
+        <el-button type="primary" @click="dialogShow = true">上传文件</el-button>
+      </el-row>
+    </header>
+    <el-row :gutter="20" type="flex" class="wrapper">
+      <el-col v-for="(item, i) in data" :key="i" class="mb-20 item">
+        <el-card
+          class="album"
+          shadow="hover"
+          :body-style="{padding:0}"
+          @click.native="viewAlbum(item)"
+        >
+          <el-row type="flex" slot="header" justify="space-between">
+            <div>
+              <strong>{{item.dir}}</strong>
+            </div>
+            <div>
+              <strong>({{item.files.length}})</strong>
+            </div>
+          </el-row>
+          <el-row
+            type="flex"
+            justify="center"
+            align="middle"
+            style="width:100%;height: 200px; overflow:hidden"
+          >
+            <el-image
+              :src="`http://qlkan2nx4.hn-bkt.clouddn.com//${item.files[0].dir}/${item.files[0].filename}`"
+              fit="cover"
+            ></el-image>
+          </el-row>
+        </el-card>
+      </el-col>
+    </el-row>
+    <el-dialog :visible.sync="dialogShow" title="上传">
+      <upload @close-dialog="()=>{dialogShow = false;getList()}"></upload>
+    </el-dialog>
   </div>
 </template>
 
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator'
+import { getFiles, getUploadToken, uploadFile } from '@/api/files';
+import Upload from '@/components/Upload/index.vue';
 import { AxiosResponse } from 'axios'
-import { delFile, getFiles, updateFile, uploadFile } from '@/api/files';
+import { FileModule } from '@/store/modules/file';
 
 @Component({
   name: 'file',
+  components: {
+    Upload
+  }
 })
 export default class extends Vue {
   loading: Boolean = false
+  dialogShow: Boolean = false
   data = []
 
-  page = {
-    pageSize: 10,
-    currentPage: 1,
-    total: 0
+  async viewAlbum({ dir, files }: any) {
+    console.log('当前查看的相册是' + dir);
+    //跳转到详情，传递key
+    FileModule.SET_FILES(files)
+    this.$router.push(`/file/details?key=${dir}`)
   }
 
-  option = {
-    align: 'center',
-    menuAlign: 'center',
-    menuPostion: 'center',
-    columnBtn: false,
-    column: [
-      {
-        label: 'ID',
-        prop: 'id',
-        hide: true,
-        addDisplay: false,
-        editDisplay: false
-      },
-      {
-        label: '账号',
-        prop: 'username',
-        editDetail: true
-      },
-      {
-        label: '密码',
-        prop: 'password',
-        type: 'password',
-        hide: true
-      },
-      {
-        label: '用户名',
-        prop: 'name'
-      },
-      {
-        label: '创建日期',
-        prop: 'created_at',
-        type: 'date',
-        format: 'yyyy-MM-dd hh:mm:ss',
-        valueFormat: 'yyyy-MM-dd hh:mm:ss',
-        addDisplay: false,
-        editDisplay: false
-      }
-    ]
-  }
-
-  async listLoad(page: any) {
-    const { currentPage, pageSize } = page
-    await this.getList({ currentPage, pageSize })
-  }
-
-  async getList(params: any) {
+  async getList() {
     this.loading = true
-    const { data, total } = await getFiles(params) as AxiosResponse["data"]
+    const { data } = await getFiles() as AxiosResponse["data"]
+    this.data = data
     setTimeout(() => {
       this.loading = false
     }, 500)
-    this.data = data
-    this.page.total = total
   }
 
-  async rowSave(row: any, done: any, loading: any) {
-    const { name, username, password } = row
-    this.loadingDown(loading)
-    await uploadFile({ name, username, password })
-    done()
-    this.refresh()
-    this.$notify.success('创建成功')
+  mounted() {
+    this.getList();
   }
 
-  async rowUpdate(row: any, index: any, done: any, loading: any) {
-    const { id, name, username, password } = row
-    let params
-    if(password) params = { id, name, username, password }
-    else params = { id, name, username }
-    this.loadingDown(loading)
-    await updateFile(params)
-    done()
-    this.refresh()
-    this.$notify.success('更新成功')
-  }
-
-  async rowDel(row: any) {
-    const id = row.id
-    await delFile({ id })
-    this.refresh()
-    this.$notify.success('删除成功')
-  }
-
-  async refresh() {
-    const { pageSize, currentPage } = this.page
-    this.getList({ pageSize, currentPage })
-  }
-
-  loadingDown(loading: any) {
-    setTimeout(() => {
-      loading()
-    }, 1000)
-  }
 }
 </script>
-<style lang='scss'></style>
-vt
+<style lang='scss' scoped>
+.album {
+  &:hover {
+    cursor: pointer;
+  }
+}
+.wrapper {
+  flex-wrap: wrap;
+  .item {
+    flex-basis: 320px;
+  }
+}
+</style>
+

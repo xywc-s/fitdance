@@ -1,6 +1,6 @@
 import { UserModule } from '@/store/modules/user'
 import axios from 'axios'
-import { Message, MessageBox } from 'element-ui'
+import { Message, MessageBox, Notification } from 'element-ui'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
@@ -55,7 +55,8 @@ service.interceptors.response.use(
       }
       return Promise.reject(new Error(res.message || 'Error'))
     } else {
-      return response.data
+      if(res.message) Notification.success(response.data.message)
+      return res
     }
   },
   (error) => {

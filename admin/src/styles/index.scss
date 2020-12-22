@@ -45,3 +45,21 @@ div:focus {
 .app-container {
   padding: 20px;
 }
+
+@for $var from 5 through 100{
+  .mr-#{$var} { margin-right: #{$var}px;}
+  .ml-#{$var} { margin-left: #{$var}px;}
+  .mt-#{$var} { margin-top: #{$var}px;}
+  .mb-#{$var} { margin-bottom: #{$var}px;}
+  .my-#{$var} { margin: #{$var}px 0;}
+  .mx-#{$var} { margin: 0 #{$var}px;}
+  .ma-#{$var} { margin: #{$var}px;}
+
+  .pr-#{$var} { padding-right: #{$var}px;}
+  .pl-#{$var} { padding-left: #{$var}px;}
+  .pt-#{$var} { padding-top: #{$var}px;}
+  .pb-#{$var} { padding-bottom: #{$var}px;}
+  .py-#{$var} { padding: #{$var}px 0;}
+  .px-#{$var} { padding: 0 #{$var}px;}
+  .pa-#{$var} { padding: #{$var}px;}
+}

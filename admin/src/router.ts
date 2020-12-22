@@ -61,6 +61,15 @@ export default new Router({
             title: '文件管理',
             icon: 'example'
           }
+        },
+        {
+          path: 'details',
+          component: () => import('@/views/file/details.vue'),
+          meta: {
+            hidden: true,
+            title: '文件上传',
+            icon: 'example'
+          }
         }
       ]
     },

@@ -6,9 +6,21 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import { getStatics } from '@/api/common';
+import { AxiosResponse } from 'axios';
+import { setDirOptions } from '@/utils/cookies';
 
 @Component({
   name: 'App'
 })
-export default class extends Vue {}
+export default class extends Vue {
+  async getStaticData() {
+    const { data } = await getStatics() as AxiosResponse['data']
+    setDirOptions(data.dirOptions)
+  }
+
+  mounted() {
+    this.getStaticData()
+  }
+}
 </script>
