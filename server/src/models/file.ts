@@ -7,9 +7,13 @@ export enum FileType {
 }
 
 export const DIROPTIONS = {
-  common: '公共文件夹',
-  product: '产品文件夹',
-  case: '案例文件夹'
+  logo: 'Logo',
+  qrcode: 'QRcode',
+  banner: 'Banner图',
+  ballet: '芭蕾裙',
+  dancing: '舞蹈裙',
+  case: '案例',
+  materials: '原材料'
 }
 
 @Entity()
