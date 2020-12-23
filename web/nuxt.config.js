@@ -33,6 +33,8 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    '~/plugins/axios',
+    '~/plugins/api'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -44,6 +46,7 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/dotenv',
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -55,7 +58,9 @@ export default {
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    baseURL: process.env.BASE_URL,
+  },
 
   // Content module configuration (https://go.nuxtjs.dev/config-content)
   content: {},
