@@ -6,19 +6,19 @@
         <span class="text-h5 title">芭蕾tutu裙系列</span>
       </v-col>
       <v-row>
-        <v-col cols="3" v-for="i in 4" :key="i">
-          <v-img src="/02.jpg" aspect-ratio="0.8"></v-img>
+        <v-col cols="3" v-for="(item,i) in ballet" :key="i">
+          <v-img :src="item" aspect-ratio="0.8"></v-img>
         </v-col>
       </v-row>
     </v-row>
 
     <v-row>
       <v-col cols="12" class="justify-center mb-8 text-center">
-        <span class="text-h5 title">芭蕾tutu裙系列</span>
+        <span class="text-h5 title">舞蹈服 练功服</span>
       </v-col>
       <v-row>
-        <v-col cols="3" v-for="i in 4" :key="i">
-          <v-img src="/02.jpg" aspect-ratio="0.8"></v-img>
+        <v-col cols="3" v-for="(item,i) in dancing" :key="i">
+          <v-img :src="item" aspect-ratio="0.8"></v-img>
         </v-col>
       </v-row>
     </v-row>
@@ -26,12 +26,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
       title: `设 / 计 / 能 / 力`,
       subtitle: 'design can force'
     }
+  },
+  computed: {
+    ...mapState(['ballet', 'dancing'])
   }
 }
 </script>

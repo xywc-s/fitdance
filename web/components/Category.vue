@@ -1,7 +1,7 @@
 <template>
   <section id="category" class="col-lg-7 col-md-9 col-sm-11 col-12 mx-auto">
-    <title-com :title="title" :subtitle="subtitle"></title-com>
-    <v-row class="d-flex my-15 text-center">
+    <title-com :title="title" :subtitle="subtitle" class="py-16"></title-com>
+    <v-row class="d-flex text-center">
       <v-col class="left flex-grow-0">
         <template v-for="(item,index) in [categories[0],categories[1]]">
           <div :key="index" :class="[index ? 'leftbottom': 'lefttop',index? '':'mb-6']">
@@ -21,7 +21,7 @@
         </div>
       </v-col>
     </v-row>
-    <v-row class="d-flex justify-space-around">
+    <v-row class="d-flex mt-15 justify-space-around">
       <v-col
         v-for="(item,index) in [categories[3],categories[4],categories[5],categories[6]]"
         :key="index"

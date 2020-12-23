@@ -9,5 +9,9 @@
 </template>
 
 <script>
-export default {}
+export default {
+  async fetch() {
+    await this.$store.dispatch('getImages')
+  }
+}
 </script>
