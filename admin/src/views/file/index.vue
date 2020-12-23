@@ -28,8 +28,9 @@
             style="width:100%;height: 200px; overflow:hidden"
           >
             <el-image
+              class="image"
               :src="`http://qlkan2nx4.hn-bkt.clouddn.com//${item.files[0].dir}/${item.files[0].filename}`"
-              fit="cover"
+              fit="contain"
             ></el-image>
           </el-row>
         </el-card>
@@ -91,6 +92,9 @@ export default class extends Vue {
   flex-wrap: wrap;
   .item {
     flex-basis: 320px;
+    .image {
+      height: 100%;
+    }
   }
 }
 </style>
