@@ -15,7 +15,7 @@
         >
           <el-row type="flex" slot="header" justify="space-between">
             <div>
-              <strong>{{item.dir}}</strong>
+              <strong>{{options[item.dir]}}</strong>
             </div>
             <div>
               <strong>({{item.files.length}})</strong>
@@ -59,6 +59,10 @@ export default class extends Vue {
   loading: Boolean = false
   dialogShow: Boolean = false
   data = []
+
+  get options() {
+    return FileModule.dirOptions
+  }
 
   async viewAlbum({ dir, files }: any) {
     console.log('当前查看的相册是' + dir);
