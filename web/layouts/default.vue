@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  mounted() {
+  async fetch() {
     await this.$store.dispatch('getImages')
   }
 }

@@ -45,7 +45,7 @@ export const mutations = {
 export const actions = {
   async getImages({ commit }) {
     const data = await this.$api.getImages()
-    console.error('fetch', JSON.parse(JSON.stringify(data)));
+    console.error('fetch', data);
     if (data.length > 0) {
       data.map(item => {
         switch (item.dir) {
