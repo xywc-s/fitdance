@@ -4,7 +4,7 @@
  * @Date: 2020-11-27 14:10:11
  */
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { AppController } from './app.controller';
@@ -19,20 +19,24 @@ import { UsersModule } from './users/users.module';
 @Module({
   imports: [
     ConfigModule.forRoot({isGlobal:true}),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '123456',
-      database: 'fitdance',
-      entities: [
-        __dirname+'/models/*.js'
-      ],
-      migrations:[
-        __dirname+"/migrations/*.js"
-      ],
-      synchronize: true
+    TypeOrmModule.forRootAsync({
+      imports:[ConfigModule],
+      useFactory: (config: ConfigService) => ({
+        type: 'postgres',
+        database: 'fitdance',
+        host: config.get('PG_HOST'),
+        port: config.get('PG_PORT'),
+        username: config.get('PG_USER'),
+        password: config.get('PG_PWD'),
+        entities: [
+          __dirname+'/models/*.js'
+        ],
+        migrations:[
+          __dirname+"/migrations/*.js"
+        ],
+        synchronize: true
+      }),
+      inject: [ConfigService]
     }),
     // TypegooseModule.forRootAsync({
     //   useFactory:async (configService: ConfigService)=>({
