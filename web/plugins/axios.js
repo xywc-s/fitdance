@@ -5,12 +5,4 @@ export default function ({ $axios, redirect }) {
       return res.data
     }
   })
-  $axios.onError(err => {
-    redirect('/index')
-    Promise.reject(error)
-  })
-
-  $axios.onResponseError((error) => {
-    Promise.reject(error)
-  })
 }
