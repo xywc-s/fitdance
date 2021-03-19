@@ -27,11 +27,7 @@
             align="middle"
             style="width:100%;height: 200px; overflow:hidden"
           >
-            <el-image
-              class="image"
-              :src="`http://qlkan2nx4.hn-bkt.clouddn.com//${item.files[0].dir}/${item.files[0].filename}`"
-              fit="contain"
-            ></el-image>
+            <el-image class="image" :src="item.files[0].src" fit="contain"></el-image>
           </el-row>
         </el-card>
       </el-col>
@@ -44,7 +40,7 @@
 
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator'
-import { getFiles, getUploadToken, uploadFile } from '@/api/files';
+import { getFiles } from '@/api/files';
 import Upload from '@/components/Upload/index.vue';
 import { AxiosResponse } from 'axios'
 import { FileModule } from '@/store/modules/file';
