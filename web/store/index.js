@@ -7,13 +7,13 @@ export const state = () => ({
     path: '/'
   }, {
     title: '芭蕾裙',
-    path: '/'
+    path: '#ballet'
   }, {
     title: '练功服',
-    path: '/'
+    path: '#dancing'
   }, {
     title: '客户案例(包含下单流程)',
-    path: '/'
+    path: '#case'
   }, {
     title: '新闻',
     path: '/'
@@ -27,7 +27,8 @@ export const state = () => ({
   materials: '',
   ballet: [],
   dancing: [],
-  case: []
+  case: [],
+  factory: []
 })
 
 export const mutations = {
@@ -68,6 +69,9 @@ export const actions = {
             break;
           case 'case':
             commit('set_files', { type: 'case', data: item.files })
+            break;
+          case 'factory':
+            commit('set_files', { type: 'factory', data: item.files })
             break;
           default:
             break;
