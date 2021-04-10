@@ -3,29 +3,32 @@
     <title-com :title="title" :subtitle="subtitle" class="py-16"></title-com>
     <v-row class="d-flex text-center">
       <v-col class="left flex-grow-0">
-        <template v-for="(item,index) in [categories[0],categories[1]]">
+        <template v-for="(item,index) in [category[0],category[1]]">
           <div :key="index" :class="[index ? 'leftbottom': 'lefttop',index? '':'mb-6']">
-            <div class="text-h4 d-flex flex-column justify-center">
-              <div class="mb-4">{{item.name}}</div>
-              <div class="icon font-weight-light align-self-center">></div>
-            </div>
+            <v-img :src="item" lazy-src="/02.jpg">
+              <template v-slot:placeholder>
+                <v-row class="fill-height ma-0" align="center" justify="center">
+                  <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                </v-row>
+              </template>
+            </v-img>
           </div>
         </template>
       </v-col>
       <v-col class="right flex-grow-1">
-        <div class="bk text-h4 d-flex justify-center">
-          <div class="d-flex align-self-end mb-6">
-            <div class="flex-grow-0">芭蕾裙专区</div>
-            <div class="icon font-weight-light flex-grow-0 align-self-center">></div>
-          </div>
+        <div class="bk">
+          <v-img :src="category[2]" lazy-src="/02.jpg">
+            <template v-slot:placeholder>
+              <v-row class="fill-height ma-0" align="center" justify="center">
+                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+              </v-row>
+            </template>
+          </v-img>
         </div>
       </v-col>
     </v-row>
     <v-row class="d-flex mt-15 justify-space-around">
-      <v-col
-        v-for="(item,index) in [categories[3],categories[4],categories[5],categories[6]]"
-        :key="index"
-      >
+      <v-col v-for="(item,index) in categories" :key="index">
         <nuxt-link class="d-flex align-center" :to="item.path">
           <span class="text-h5">{{item.name}}</span>
           <span class="text-h5 mx-1">></span>
@@ -43,21 +46,6 @@ export default {
       title: `产 / 品 / 分 / 类`,
       subtitle: 'class products',
       categories: [{
-        name: '基础练功服',
-        path: '/category/practice-clothes',
-        level: 1,
-        img: ''
-      }, {
-        name: '蓬蓬裙舞蹈服',
-        path: '/category/dancing-dress',
-        level: 2,
-        img: ''
-      }, {
-        name: '芭蕾裙专区',
-        path: '/category/ballet-skirt',
-        level: 3,
-        img: ''
-      }, {
         name: '披肩外套',
         path: '/category/coat',
         level: 4,
@@ -78,6 +66,11 @@ export default {
         level: 7,
         img: '/category_4.png'
       }]
+    }
+  },
+  computed: {
+    category() {
+      return this.$store.state.category
     }
   }
 }
@@ -113,11 +106,27 @@ export default {
   }
 
   .right {
+    flex-basis: '63.3%';
     .bk {
       background-color: pink;
       height: 100%;
       border-top-right-radius: 4rem;
       border-bottom-right-radius: 4rem;
+      position: relative;
+      overflow: hidden;
+      &::before {
+        display: block;
+        content: ' ';
+        width: 100%;
+        padding: 25% 0%;
+      }
+      > div:first-child {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+      }
     }
   }
 

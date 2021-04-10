@@ -10,6 +10,7 @@ export const DIROPTIONS = {
   logo: 'Logo',
   qrcode: 'QRcode',
   banner: 'Banner图',
+  category: '产品分类',
   ballet: '芭蕾裙',
   dancing: '舞蹈裙',
   case: '案例',
