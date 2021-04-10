@@ -13,7 +13,8 @@ export const DIROPTIONS = {
   ballet: '芭蕾裙',
   dancing: '舞蹈裙',
   case: '案例',
-  materials: '原材料'
+  materials: '原材料',
+  factory: '工厂'
 }
 
 @Entity()
