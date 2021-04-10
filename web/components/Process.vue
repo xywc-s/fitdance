@@ -50,7 +50,7 @@ export default {
         title: '售后服务',
         subtitle: 'after-sales'
       }]
-      this.$store.state.process.map((index, img) => {
+      this.$store.state.process.map((img, index) => {
         this.$set(items[index], 'img', img)
       })
       return items

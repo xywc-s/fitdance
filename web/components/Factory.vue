@@ -61,10 +61,6 @@ export default {
     factories() {
       return this.$store.state.factory
     }
-  },
-  mounted() {
-    console.log('factories', this.factories);
-    console.log('state', this.$store.state);
   }
 }
 </script>
