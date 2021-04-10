@@ -28,7 +28,8 @@ export const state = () => ({
   ballet: [],
   dancing: [],
   case: [],
-  factory: []
+  factory: [],
+  process: []
 })
 
 export const mutations = {
@@ -72,6 +73,9 @@ export const actions = {
             break;
           case 'factory':
             commit('set_files', { type: 'factory', data: item.files })
+            break;
+          case 'process':
+            commit('set_files', { type: 'process', data: item.files })
             break;
           default:
             break;

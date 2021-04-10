@@ -14,7 +14,8 @@ export const DIROPTIONS = {
   dancing: '舞蹈裙',
   case: '案例',
   materials: '原材料',
-  factory: '工厂'
+  factory: '工厂',
+  process: '流程'
 }
 
 @Entity()
