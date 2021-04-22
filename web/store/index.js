@@ -12,7 +12,7 @@ export const state = () => ({
     title: '练功服',
     path: '#dancing'
   }, {
-    title: '客户案例(包含下单流程)',
+    title: '客户案例',
     path: '#case'
   }, {
     title: '新闻',
@@ -21,6 +21,7 @@ export const state = () => ({
     title: '联系我们',
     path: '/'
   }],
+  tel: '13798394350',
   logo: '',
   qrcode: '',
   banner: [],

@@ -6,7 +6,7 @@
           <v-icon style="font-size:3.5rem;color:white">mdi-phone-outline</v-icon>
           <div class="ml-2 white--text">
             <h3 class="line-height-1">芭蕾裙 舞蹈服定制热线</h3>
-            <h1 class="line-height-1">13708208599</h1>
+            <h1 class="line-height-1">{{tel}}</h1>
           </div>
         </v-row>
         <v-img class="flex-grow-0 ml-16 qrcode" contain :src="qrcode"></v-img>
@@ -25,7 +25,7 @@
 import { mapState } from 'vuex';
 export default {
   computed: {
-    ...mapState(['menus', 'qrcode'])
+    ...mapState(['menus', 'tel', 'qrcode'])
   }
 }
 </script>
