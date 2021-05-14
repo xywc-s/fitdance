@@ -1,7 +1,7 @@
 <template>
-  <section id="material">
-    <title-com :title="title" :subtitle="subtitle" class="py-16"></title-com>
-    <v-img :src="materials" aspect-ratio="2.4"></v-img>
+  <section id="material" class="container-fuild">
+    <f-top-title :title="title" :sub-title="subtitle"></f-top-title>
+    <img style="max-width:100%" :src="materials" class="my-6"></img>
   </section>
 </template>
 
@@ -12,7 +12,7 @@ export default {
   components: { TitleCom },
   data() {
     return {
-      title: '原 / 材 / 料',
+      title: '原材料',
       subtitle: 'the original materials'
     }
   },

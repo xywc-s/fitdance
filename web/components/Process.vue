@@ -1,17 +1,17 @@
 <template>
-  <section id="process">
-    <title-com :title="title" :subtitle="subtitle"></title-com>
-    <v-row class="d-flex justify-center py-12">
-      <v-col v-for="(item,index) in process" :key="index" class="col-md-1">
-        <v-img class="image" :src="item.img" lazy-src="/02.jpg" aspect-ratio="1">
+  <section id="process" class="container-fuild">
+    <f-top-title :title="title" :sub-title="subtitle"></f-top-title>
+    <v-row class="d-flex justify-center my-8 mx-16">
+      <v-col v-for="(item,index) in process" :key="index" class="px-6">
+        <v-img class="image" :src="item.img" aspect-ratio="1">
           <template v-slot:placeholder>
             <v-row class="fill-height ma-0" align="center" justify="center">
               <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
             </v-row>
           </template>
         </v-img>
-        <div class="text-h5 pt-3 text-center">{{item.title}}</div>
-        <div class="text-center">{{item.subtitle}}</div>
+        <div class="text-h6 pt-3 text-center">{{item.title}}</div>
+        <div class="text-center text-caption text--disabled">{{item.subtitle}}</div>
       </v-col>
     </v-row>
   </section>
@@ -21,8 +21,8 @@
 export default {
   data() {
     return {
-      title: `芭蕾裙定制流程`,
-      subtitle: 'order process'
+      title: `定制流程`,
+      subtitle: 'customization process'
     }
   },
   computed: {
@@ -40,7 +40,7 @@ export default {
         title: '批量生产',
         subtitle: 'production'
       }, {
-        src: '/02.jpg',
+        img: '/02.jpg',
         title: '质量检查',
         subtitle: 'check'
       }, {

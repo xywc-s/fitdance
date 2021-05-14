@@ -1,15 +1,32 @@
-.v-application a{
-  color: initial;
-  text-decoration: none;
+.v-application {
+  font-family: "Microsoft YaHei", sans-serif;
+  a{
+    color: initial;
+    text-decoration: none;
+  }
 }
 
 .line-height-1{
   line-height: 1;
 }
 
-.logo {
-  flex-basis: 19%;
+.font-yahei {
+  font-family: "Microsoft YaHei", sans-serif;
 }
-.qrcode {
-  flex-basis: 10%;
+
+.font-simhei{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+.container-fuild{
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.color-primary{
+  color: $c-primary;
+}
+.color-bg-gray{
+  background: $c-bg-gray;
+}
+

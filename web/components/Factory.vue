@@ -1,67 +1,97 @@
 <template>
   <section id="factory">
-    <title-com :title="title" :subtitle="subtitle" class="py-16"></title-com>
-    <v-row no-gutters>
-      <v-row class="col-6 d-flex my-2" no-gutters>
-        <v-col class="col-7">
-          <v-img :src="factories[0]" height="100%">
-            <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-              </v-row>
-            </template>
-          </v-img>
-        </v-col>
-        <v-col class="col-5 d-flex flex-column px-2">
-          <v-img :src="factories[1]" width="100%">
-            <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-              </v-row>
-            </template>
-          </v-img>
-          <v-img :src="factories[2]" width="100%" class="my-2">
-            <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-              </v-row>
-            </template>
-          </v-img>
-          <v-img :src="factories[3]" width="100%">
-            <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-              </v-row>
-            </template>
-          </v-img>
-        </v-col>
-      </v-row>
-      <v-col class="col-6 my-2">
-        <v-img :src="factories[4]" aspect-ratio="1.1">
-          <template v-slot:placeholder>
-            <v-row class="fill-height ma-0" align="center" justify="center">
-              <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-            </v-row>
-          </template>
-        </v-img>
-      </v-col>
-    </v-row>
+    <div class="container-fuild">
+      <f-top-title :title="title" :sub-title="subtitle"></f-top-title>
+    </div>
+    <div class="factory mt-8">
+      <div class="container-fuild d-flex align-center box">
+        <div class="video" @click="videoControl">
+          <video
+            id="video"
+            height="267"
+            width="400"
+            :poster="preloadImg"
+            src="../static/home/fitdance.mp4"
+          ></video>
+          <i v-if="showIcon"></i>
+        </div>
+        <div class="content white--text px-12 text-justify" v-html="content"></div>
+      </div>
+    </div>
   </section>
 </template>
 
-<script>
+<script>  
+const preloadImg = require('../static/home/video-first.png')
 export default {
   data() {
     return {
-      title: `工 / 厂 / 能 / 力`,
-      subtitle: 'factory can force'
+      title: `工厂能力`,
+      subtitle: 'factory capacity',
+      showIcon: true,
+      video: null,
+      preloadImg,
+      content: `斐丹丝，集舞蹈服装设计、生产、销售为一体的大型自主品牌企业。</br></br>
+                钻研设计、打造二十余载，提供舞蹈服、芭蕾舞蹈服从定样、打样、生产销售一体化服务。用心、用情、用爱，将舞者梦用于制衣，为广大舞者提供了精美绝伦、安全舒适和专业呵护的舞蹈成衣和舞蹈用品。用情制衣、针针见心、用爱出品，件件皆精！</br></br>
+                与梦同情，心之大、爱之深、品之珍！`,
+    }
+  },
+  methods: {
+    videoControl() {
+      console.log(this.video);
+
+      if (this.video.paused) {
+        this.video.play()
+        this.showIcon = false
+      } else {
+        this.video.pause()
+        this.showIcon = true
+      }
     }
   },
   computed: {
     factories() {
       return this.$store.state.factory
     }
+  },
+  mounted() {
+    this.video = document.getElementById('video')
+    this.video.onended = () => {
+      this.showIcon = true
+    }
   }
 }
 </script>
+<style lang="scss" scoped>
+.box {
+  height: 100%;
+}
+.factory {
+  min-width: 1200px;
+  height: 344px;
+  background-image: url('../static/home/工厂能力背景.png');
+  background-position-x: center;
+  .video {
+    position: relative;
+    i {
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -28px;
+      margin-left: -28px;
+      background-image: url('../static/home/播放.png');
+      width: 56px;
+      height: 56px;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .content {
+    line-height: 1.8;
+    letter-spacing: 0.3rem;
+  }
+}
+</style>
 

@@ -1,39 +1,32 @@
 <template>
-  <section id="design" class="col-lg-7 col-md-9 col-sm-11 col-12 mx-auto">
-    <title-com :title="title" :subtitle="subtitle" class="py-16"></title-com>
-    <v-row id="ballet" class="mb-16">
-      <v-col cols="12" class="justify-center mb-8 text-center">
-        <span class="text-h5 title">芭蕾tutu裙系列</span>
-      </v-col>
-      <v-row>
-        <v-col cols="3" v-for="(item,i) in ballet" :key="i">
-          <v-img :src="item" aspect-ratio="0.8">
-            <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-              </v-row>
-            </template>
-          </v-img>
-        </v-col>
-      </v-row>
-    </v-row>
+  <section id="design" class="container-fuild">
+    <f-top-title :title="title" :sub-title="subtitle"></f-top-title>
 
-    <v-row id="dancing">
-      <v-col cols="12" class="justify-center mb-8 text-center">
-        <span class="text-h5 title">舞蹈服 练功服</span>
-      </v-col>
-      <v-row>
-        <v-col cols="3" v-for="(item,i) in dancing" :key="i">
-          <v-img :src="item" aspect-ratio="0.8">
-            <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-              </v-row>
-            </template>
-          </v-img>
-        </v-col>
-      </v-row>
-    </v-row>
+    <template v-for="(val, index) in 2">
+      <div :id=" index ? 'dancing': 'ballet' " class="pt-8">
+        <div class="text-center">
+          <span class="text-h6">{{product_title[index]}}</span>
+        </div>
+        <v-row align="end">
+          <v-col cols="2"></v-col>
+          <v-col cols="2" v-for="(item,i) in [ballet, dancing][index]" :key="i">
+            <v-img :src="item" aspect-ratio="0.8">
+              <template v-slot:placeholder>
+                <v-row class="fill-height ma-0" align="center" justify="center">
+                  <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                </v-row>
+              </template>
+            </v-img>
+          </v-col>
+          <v-col cols="2">
+            <div class="view-more">
+              查看更多
+              <span>>></span>
+            </div>
+          </v-col>
+        </v-row>
+      </div>
+    </template>
   </section>
 </template>
 
@@ -42,8 +35,9 @@ import { mapState } from 'vuex';
 export default {
   data() {
     return {
-      title: `设 / 计 / 能 / 力`,
-      subtitle: 'design can force'
+      title: `产品展示`,
+      subtitle: 'products display',
+      product_title: ['芭蕾TUTU裙系列', '舞蹈服 练功服']
     }
   },
   computed: {
@@ -52,9 +46,10 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.title {
-  background-color: rgb(87, 212, 129, 0.8);
-  padding: 0.5rem 1.5rem;
-  border-radius: 2rem;
+.view-more {
+  &:hover {
+    cursor: pointer;
+    color: $c-primary;
+  }
 }
 </style>

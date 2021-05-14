@@ -4,24 +4,24 @@ export const state = () => ({
     path: '/'
   }, {
     title: '斐丹丝',
-    path: '/'
+    path: '/fitdance'
   }, {
     title: '芭蕾裙',
-    path: '#ballet'
+    path: '/ballet'
   }, {
     title: '练功服',
-    path: '#dancing'
+    path: '/dancing'
   }, {
     title: '客户案例',
-    path: '#case'
+    path: '/case'
   }, {
-    title: '新闻',
-    path: '/'
+    title: '新闻中心',
+    path: '/news'
   }, {
     title: '联系我们',
-    path: '/'
+    path: '/about'
   }],
-  tel: '13798394350',
+  tel: '137-9839-4350',
   logo: '',
   qrcode: '',
   banner: [],

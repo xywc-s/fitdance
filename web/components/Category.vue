@@ -1,50 +1,29 @@
 <template>
-  <section id="category" class="col-lg-7 col-md-9 col-sm-11 col-12 mx-auto">
-    <title-com :title="title" :subtitle="subtitle" class="py-16"></title-com>
-    <v-row class="d-flex text-center">
-      <v-col class="left flex-grow-0">
-        <template v-for="(item,index) in [category[0],category[1]]">
-          <div :key="index" :class="[index ? 'leftbottom': 'lefttop',index? '':'mb-6']">
-            <v-img :src="item" lazy-src="/02.jpg">
-              <template v-slot:placeholder>
-                <v-row class="fill-height ma-0" align="center" justify="center">
-                  <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                </v-row>
-              </template>
-            </v-img>
-          </div>
-        </template>
-      </v-col>
-      <v-col class="right flex-grow-1">
-        <div class="bk">
-          <v-img :src="category[2]" lazy-src="/02.jpg">
-            <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-              </v-row>
-            </template>
-          </v-img>
+  <section class="container-fuild">
+    <f-top-title :title="title" :sub-title="subtitle"></f-top-title>
+    <div class="category text-center mt-8 mx-auto">
+      <div class="d-flex justify-center">
+        <div class="mx-3" v-for="(image, index) in images">
+          <v-img :src="image" />
+          <div>{{titles[index]}}</div>
         </div>
-      </v-col>
-    </v-row>
-    <v-row class="d-flex mt-15 justify-space-around">
-      <v-col v-for="(item,index) in categories" :key="index">
-        <nuxt-link class="d-flex align-center" :to="item.path">
-          <span class="text-h5">{{item.name}}</span>
-          <span class="text-h5 mx-1">></span>
-          <img style="max-width: 120px" :src="item.img" />
-        </nuxt-link>
-      </v-col>
-    </v-row>
+      </div>
+      <div class="border"></div>
+    </div>
   </section>
 </template>
 
 <script>
+const images = [require('../static/home/练功服专区.png'),
+require('../static/home/蓬蓬裙专区.png'),
+require('../static/home/芭蕾裙专区.png')]
 export default {
   data() {
     return {
-      title: `产 / 品 / 分 / 类`,
+      title: `产品分类`,
       subtitle: 'class products',
+      images,
+      titles: ['基础练功服', '蓬蓬裙舞蹈服', '芭蕾裙专区'],
       categories: [{
         name: '披肩外套',
         path: '/category/coat',
@@ -77,66 +56,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#category {
-  .left {
-    flex-basis: 36.7%;
-    .lefttop {
-      background-color: #ffb74d;
-    }
-    .leftbottom {
-      background-color: $c-green;
-    }
-    .lefttop,
-    .leftbottom {
-      position: relative;
-      &::before {
-        display: block;
-        content: ' ';
-        width: 100%;
-        padding: 25% 0%;
-      }
-      > div:first-child {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: 0;
-      }
-    }
-  }
-
-  .right {
-    flex-basis: '63.3%';
-    .bk {
-      background-color: pink;
-      height: 100%;
-      border-top-right-radius: 4rem;
-      border-bottom-right-radius: 4rem;
-      position: relative;
-      overflow: hidden;
-      &::before {
-        display: block;
-        content: ' ';
-        width: 100%;
-        padding: 25% 0%;
-      }
-      > div:first-child {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: 0;
-      }
-    }
-  }
-
-  .icon {
-    background-color: mediumvioletred;
-    width: 3.5vw;
-    font-size: calc(100vw / 50);
-    color: white;
-    border-radius: 25rem;
-    line-height: 2rem;
+.category {
+  position: relative;
+  width: 950px;
+  z-index: 1;
+  .border {
+    position: absolute;
+    left: 0;
+    top: 100px;
+    z-index: -1;
+    height: 167px;
+    width: 100%;
+    border: 1px solid #ebe9e9;
   }
 }
 </style>
