@@ -1,7 +1,7 @@
 <template>
   <section id="factory">
     <div class="container-fuild">
-      <f-top-title :title="title" :sub-title="subtitle"></f-top-title>
+      <f-top-title class="mt-16" :title="title" :sub-title="subtitle"></f-top-title>
     </div>
     <div class="factory mt-8">
       <div class="container-fuild d-flex align-center box">

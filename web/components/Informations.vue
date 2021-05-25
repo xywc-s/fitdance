@@ -47,7 +47,7 @@ export default {
           title: '舞蹈演出服装定制',
           date: '2021-05-11'
         }, {
-          title: '舞蹈演出服装定制',
+          title: '芭蕾舞学习了这么长时间，你知道芭蕾舞是什么东西啊',
           date: '2021-05-11'
         }
       ]
@@ -104,7 +104,7 @@ export default {
   display: block;
   color: white;
   background-color: #aaa;
-  padding: 6px 24px;
+  padding: 8px 100px;
   border-radius: 1px;
   &:hover {
     cursor: pointer;

@@ -13,7 +13,7 @@ export const state = () => ({
     path: '/dancing'
   }, {
     title: '客户案例',
-    path: '/case'
+    path: '/cases'
   }, {
     title: '新闻中心',
     path: '/news'
@@ -21,7 +21,24 @@ export const state = () => ({
     title: '联系我们',
     path: '/about'
   }],
-  tel: '137-9839-4350',
+  datas: [{
+    number: 21,
+    unit: '年',
+    sub: '设计、生产经验'
+  }, {
+    number: 10000,
+    unit: '平方米',
+    sub: '生产基地'
+  }, {
+    number: '5-15',
+    unit: '天',
+    sub: '快速发货'
+  }, {
+    number: '100000+',
+    unit: '',
+    sub: '每月产量'
+  }],
+  tel: '137-0720-8559',
   logo: '',
   qrcode: '',
   banner: [],

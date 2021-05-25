@@ -6,10 +6,8 @@
 </template>
 
 <script>
-import TitleCom from './TitleCom.vue'
 import { mapState } from 'vuex';
 export default {
-  components: { TitleCom },
   data() {
     return {
       title: '原材料',

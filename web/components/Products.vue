@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <section class="relative">
+    <div v-if="title" class="products-title font-weight-bold absolute">{{title}}</div>
     <v-tabs right hide-slider active-class="tabs" v-model="model" @change="tabChange">
       <v-tab class="tab" v-for="(tab,i) in tabs" :key="i" :href="`#tab-${i}`">{{tab}}</v-tab>
     </v-tabs>
@@ -27,7 +28,7 @@
         </div>
       </v-tab-item>
     </v-tabs-items>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -35,6 +36,11 @@ const product_1 = require('../static/产品01.png')
 const product_2 = require('../static/产品02.png')
 const product_3 = require('../static/产品03.png')
 export default {
+  props: {
+    title: {
+      type: String,
+    }
+  },
   data() {
     return {
       model: 'tab-0',
@@ -69,6 +75,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.products-title {
+  @extend .color-3;
+  z-index: 1;
+  top: 0;
+  left: 130px;
+  height: 48px;
+  line-height: 48px;
+}
 .tabs {
   color: #fff !important;
   background-color: $c-primary;

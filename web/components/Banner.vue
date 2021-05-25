@@ -9,7 +9,7 @@
       :show-arrows-on-hover="true"
     >
       <v-carousel-item v-for="(banner, i) in banners" :key="i">
-        <img style="max-width: 1920px; min-width:1200px; width:100%" :src="banner" />
+        <img class="banner" :src="banner" />
       </v-carousel-item>
     </v-carousel>
   </div>

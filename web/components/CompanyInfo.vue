@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="text-subtitle-1 mb-3">斐丹丝服饰（湖北）有限公司</div>
-    <div class="d-flex text-caption text--disabled ml-3">
+    <div :class="[mainTitle?mainTitle:'text-subtitle-1', 'mb-3']">斐丹丝服饰（湖北）有限公司</div>
+    <div :class="[subTitle ?subTitle: 'text-caption text--disabled', 'd-flex','ml-3']">
       <div>
         <div class="mb-1">电话：0717-3222718 / {{tel}}</div>
         <div class="mb-1">邮箱：wdf.88@outlook.com</div>
@@ -23,6 +23,12 @@ export default {
     showSubContact: {
       default: false,
       type: Boolean
+    },
+    mainTitle: {
+      type: String
+    },
+    subTitle: {
+      type: String
     }
   },
   computed: {

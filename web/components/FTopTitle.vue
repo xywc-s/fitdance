@@ -1,5 +1,5 @@
 <template>
-  <div class="box mx-auto">
+  <div class="box mx-auto mt-7">
     <div class="text-center">
       <span class="main-title px-4">
         <slot name="title">{{title}}</slot>

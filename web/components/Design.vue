@@ -5,26 +5,25 @@
     <template v-for="(val, index) in 2">
       <div :id=" index ? 'dancing': 'ballet' " class="pt-8">
         <div class="text-center">
-          <span class="text-h6">{{product_title[index]}}</span>
+          <span class="design-title">{{product_title[index]}}</span>
         </div>
-        <v-row align="end">
-          <v-col cols="2"></v-col>
-          <v-col cols="2" v-for="(item,i) in [ballet, dancing][index]" :key="i">
-            <v-img :src="item" aspect-ratio="0.8">
+        <div class="d-flex justify-space-between mt-4">
+          <div v-for="(item,i) in [ballet, dancing][index]" :key="i">
+            <v-img :src="item">
               <template v-slot:placeholder>
                 <v-row class="fill-height ma-0" align="center" justify="center">
                   <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
                 </v-row>
               </template>
             </v-img>
-          </v-col>
-          <v-col cols="2">
-            <div class="view-more">
-              查看更多
-              <span>>></span>
-            </div>
-          </v-col>
-        </v-row>
+          </div>
+        </div>
+        <div class="d-flex justify-end mt-2">
+          <div class="view-more">
+            查看更多
+            <span>>></span>
+          </div>
+        </div>
       </div>
     </template>
   </section>
@@ -47,9 +46,21 @@ export default {
 </script>
 <style lang="scss" scoped>
 .view-more {
+  border: 1px solid #666;
+  width: 277px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  transition: 0.1s all ease-in-out;
   &:hover {
     cursor: pointer;
-    color: $c-primary;
+    color: white;
+    background-color: $c-primary;
+    border-color: $c-primary;
   }
+}
+.design-title {
+  font-size: 22px;
+  letter-spacing: 0.2rem;
 }
 </style>

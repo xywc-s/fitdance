@@ -18,11 +18,23 @@
         </div>
       </section>
     </section>
-    <culture class="my-16"></culture>
+    <section id="culture" class="container-fuild">
+      <f-top-title class="mt-16" title="企业文化" sub-title="corporate culture"></f-top-title>
+      <div class="d-flex mt-8">
+        <img src="../static/home/企业文化-图片01.png" />
+        <div class="right-box flex-grow-1 px-10 py-12">
+          <culture></culture>
+          <img style="max-width:100%" src="../static/home/企业文化-图片02.png" />
+        </div>
+      </div>
+    </section>
     <factory></factory>
     <material class="my-16"></material>
     <design class="my-16"></design>
     <process class="my-16"></process>
+    <section id="process" class="container-fuild">
+      <f-top-title class="mt-16" title="定制流程" sub-title="customization process"></f-top-title>
+    </section>
     <case class="my-16"></case>
   </section>
 </template>
@@ -67,6 +79,18 @@ export default {
         color: white;
         background-color: $c-primary;
       }
+    }
+  }
+}
+
+#culture {
+  .right-box {
+    position: relative;
+    background-color: $c-bg-gray;
+    img {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
     }
   }
 }

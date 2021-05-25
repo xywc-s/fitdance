@@ -9,8 +9,8 @@
         <template v-for="{title,path} in menus">
           <li
             :key="path"
-            :class="{'active': path === $route.path, 'align-self-end': true}"
-            @click="()=> { $router.push(path)}"
+            :class="{'active':path ===$route.path || ($route.path.includes(path) && path !=='/'), 'align-self-end': true}"
+            @click="routeChange(path)"
           >{{title}}</li>
         </template>
       </ul>
@@ -23,6 +23,11 @@ import { mapState } from 'vuex';
 export default {
   computed: {
     ...mapState(['menus', 'tel', 'logo', 'qrcode'])
+  },
+  methods: {
+    routeChange(path) {
+      this.$router.push(path)
+    }
   }
 }
 </script>
