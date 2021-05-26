@@ -2,7 +2,9 @@
   <section id="news-center" class="text-center">
     <img class="max-w-100" :src="banner" />
     <div class="container-fuild text-left">
-      <FTitle class="mt-16 mb-10">问题解答</FTitle>
+      <FTitle class="my-12">新闻中心</FTitle>
+      <NewsInfo></NewsInfo>
+      <FTitle class="my-10">问题解答</FTitle>
       <div class="d-flex align-center">
         <div class="d-flex flex-column mr-12">
           <div v-for="({q,a},index) in qa" :key="index" class="pl-14 text-justify qa">
