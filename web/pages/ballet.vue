@@ -1,5 +1,5 @@
 <template>
-  <section id="ballet">
+  <section id="ballet" class="text-center">
     <img class="max-w-100" :src="banner" />
   </section>
 </template>

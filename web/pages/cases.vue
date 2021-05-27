@@ -11,10 +11,10 @@
       </div>
       <f-title class="mt-16">品牌伙伴</f-title>
       <img class="mt-8" :src="partners" />
-      <div class="d-flex justify-space-around align-center mt-10">
+      <div class="d-flex justify-center align-center mt-7">
         <img :src="brand" />
-        <div>
-          <CompanyInfo mainTitle="font-weight-bold" subTitle="text-subtitle-2"></CompanyInfo>
+        <div style="margin-left:254px">
+          <CompanyInfo mainTitle="font-weight-bold color-3" subTitle="text-subtitle-2 color-3"></CompanyInfo>
         </div>
       </div>
       <Products class="my-16" title="相关产品"></Products>

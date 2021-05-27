@@ -31,9 +31,9 @@
     <factory></factory>
     <material class="my-16"></material>
     <design class="my-16"></design>
-    <process class="my-16"></process>
     <section id="process" class="container-fuild">
       <f-top-title class="mt-16" title="定制流程" sub-title="customization process"></f-top-title>
+      <process class="my-16"></process>
     </section>
     <case class="my-16"></case>
   </section>

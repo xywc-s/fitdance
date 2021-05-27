@@ -1,10 +1,10 @@
 <template>
-  <section>
+  <section class="text-center">
     <img class="max-w-100" :src="banner" />
-    <div class="color-bg-gray">
+    <div class="color-bg-gray mx-auto" style="min-width: 1200px; max-width: 1920px; ">
       <div class="container-fuild py-12">
         <v-row class="mx-auto" style="width:80%">
-          <v-col v-for="{number, unit, sub} in $store.state.datas" :key="sub" class="text-center">
+          <v-col v-for="{number, unit, sub} in $store.state.datas" :key="sub">
             <div>
               <span class="color-3" style="font-size:40px">{{number}}</span>
               <span class="color-9" style="font-size:19px">{{unit}}</span>
@@ -14,7 +14,7 @@
         </v-row>
       </div>
     </div>
-    <div class="container-fuild">
+    <div class="container-fuild text-left">
       <Products title="相关产品" class="mb-10"></Products>
     </div>
   </section>
