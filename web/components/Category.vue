@@ -4,7 +4,7 @@
     <div class="category text-center mt-16">
       <div class="d-flex justify-space-between">
         <div v-for="(image, index) in images">
-          <v-img :src="image" />
+          <v-img class="image-scale" :src="image" />
           <div class="mt-4 category-title">{{titles[index]}}</div>
         </div>
       </div>

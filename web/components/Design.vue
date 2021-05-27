@@ -9,7 +9,7 @@
         </div>
         <div class="d-flex justify-space-between mt-4">
           <div v-for="(item,i) in [ballet, dancing][index]" :key="i">
-            <v-img :src="item">
+            <v-img class="image-scale" :src="item">
               <template v-slot:placeholder>
                 <v-row class="fill-height ma-0" align="center" justify="center">
                   <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
