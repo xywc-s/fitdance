@@ -14,7 +14,7 @@
                 class="card-carousel-cards"
                 :style="{ transform: 'translateX' + '(' + currentOffset + 'px' + ')'}"
               >
-                <div class="card-carousel--card" v-for="(image, index) in items" :key="index">
+                <div class="card-carousel--card" v-for="(image, index) in items[i]" :key="index">
                   <img :src="image" />
                   <div class="card-carousel--card--footer">
                     <p>B8090背心雪纺裙</p>
@@ -32,9 +32,29 @@
 </template>
 
 <script>
-const product_1 = require('../static/产品01.png')
-const product_2 = require('../static/产品02.png')
-const product_3 = require('../static/产品03.png')
+const items = [
+  [
+    require('../static/products/ralations/全部01.jpg'),
+    require('../static/products/ralations/全部02.jpg'),
+    require('../static/products/ralations/全部03.jpg'),
+  ], [
+    require('../static/products/ralations/基础练功服01.jpg'),
+    require('../static/products/ralations/基础练功服02.jpg'),
+    require('../static/products/ralations/基础练功服03.jpg'),
+  ], [
+    require('../static/products/ralations/蓬蓬裙01.jpg'),
+    require('../static/products/ralations/蓬蓬裙02.jpg'),
+    require('../static/products/ralations/蓬蓬裙03.jpg'),
+  ], [
+    require('../static/products/ralations/舞蹈鞋01.jpg'),
+    require('../static/products/ralations/舞蹈鞋02.jpg'),
+    require('../static/products/ralations/舞蹈鞋03.jpg'),
+  ], [
+    require('../static/products/ralations/芭蕾裙01.jpg'),
+    require('../static/products/ralations/芭蕾裙02.jpg'),
+    require('../static/products/ralations/芭蕾裙03.jpg'),
+  ]
+]
 export default {
   props: {
     title: {
@@ -45,7 +65,7 @@ export default {
     return {
       model: 'tab-0',
       tabs: ['全部', '基础练功服', '蓬蓬裙舞蹈裙', '舞蹈鞋舞蹈袜', '定制服务'],
-      items: [product_1, product_2, product_3, product_3, product_2],
+      items,
       currentOffset: 0,
       windowSize: 3,
       paginationFactor: 320,
@@ -53,7 +73,7 @@ export default {
   },
   computed: {
     atEndOfList() {
-      return this.currentOffset <= (this.paginationFactor * -1) * (this.items.length - this.windowSize);
+      return this.currentOffset <= (this.paginationFactor * -1) * (this.items[this.model.replace('tab-', '')].length - this.windowSize);
     },
     atHeadOfList() {
       return this.currentOffset === 0;
