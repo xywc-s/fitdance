@@ -69,7 +69,7 @@ export default {
 .factory {
   min-width: 1200px;
   height: 344px;
-  background-image: url('../static/home/工厂能力背景.png');
+  background-image: url('../static/home/factory-bg.jpg');
   background-position-x: center;
   .video {
     position: relative;
