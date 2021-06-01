@@ -29,12 +29,16 @@
         <div class="bg-border"></div>
       </v-row>
 
-      <section class="mt-12">
-        <div>
+      <section class="mt-12 profession">
+        <div class="d-flex justify-space-between align-end">
           <FTitle>专业芭蕾舞裙</FTitle>
-          <div class="d-flex flex-wrap justify-space-between mt-4">
-            <img v-for="(image, i) in products" :src="image" :key="i" class="mb-3" />
+          <div class="d-flex">
+            <div class="btn">联系我们</div>
+            <div class="btn">我要定制</div>
           </div>
+        </div>
+        <div class="d-flex flex-wrap justify-space-between mt-4">
+          <img v-for="(image, i) in products" :src="image" :key="i" class="mb-3" />
         </div>
       </section>
 
@@ -155,6 +159,22 @@ export default {
     position: absolute;
     top: 90px;
     right: 163px;
+  }
+}
+
+.profession {
+  .btn {
+    width: 140px;
+    height: 32px;
+    text-align: center;
+    line-height: 32px;
+    color: #666;
+    font-size: 14px;
+    &:hover {
+      background-color: $c-primary;
+      color: white;
+      cursor: pointer;
+    }
   }
 }
 </style>
