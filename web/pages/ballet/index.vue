@@ -1,5 +1,6 @@
 <template>
   <section>
+    <FloatBar></FloatBar>
     <div class="container-fuild">
       <FTitle class="mt-12">热门产品</FTitle>
       <v-row
