@@ -32,7 +32,7 @@
         <FButton>更多产品</FButton>
       </div>
 
-      <!-- <PromoteCarousel class="my-12"></PromoteCarousel> -->
+      <PromoteCarousel class="my-12"></PromoteCarousel>
 
       <FTitle class="mt-10 mb-7">舞蹈袜</FTitle>
       <div class="relative stock">
