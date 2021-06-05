@@ -38,6 +38,8 @@ export const state = () => ({
     unit: '',
     sub: '每月产量'
   }],
+  isLeftMinimizi: false,
+  isRightMinimizi: false,
   tel: '137-0720-8559',
   logo: '',
   qrcode: '',
@@ -59,6 +61,14 @@ export const mutations = {
   set_files(state, { type, data }) {
     const files = data.map(file => file.src)
     state[type] = files
+  },
+
+  set_floatbar_status(state, { direction }) {
+    if (direction === 'left') {
+      state.isLeftMinimizi = !state.isLeftMinimizi
+    } else if (direction === 'right') {
+      state.isRightMinimizi = !state.isRightMinimizi
+    }
   }
 
 }

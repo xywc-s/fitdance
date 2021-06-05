@@ -1,7 +1,10 @@
 <template>
   <section class="text-left">
-    <div class="left-bar">
-      <img :src="icon_mini" class="mini" />
+    <div
+      class="left-bar"
+      :style="isLeftMinimizi?{width: '20px',height: '20px' }:{ width: '187px', height:'auto'}"
+    >
+      <img :src="icon_mini" class="mini" @click.stop="minimize('left')" />
       <div class="pa-5 font-22">其他专区</div>
       <div
         :class="['pl-5 pb-4 font-16', {'active': $route.path === path}]"
@@ -14,11 +17,14 @@
         </div>
       </div>
     </div>
-    <div class="right-bar pl-5 py-4">
-      <img :src="icon_mini" class="mini" />
-      <div class="pb-4 font-22">在线客服</div>
+    <div
+      class="right-bar"
+      :style="isRightMinimizi?{width: '22px',height: '20px' }:{ width: 'auto', height:'auto'}"
+    >
+      <img :src="icon_mini" class="mini" @click.stop="minimize('right')" />
+      <div class="pl-5 py-4 font-22">在线客服</div>
       <div
-        :class="['pb-2 font-16']"
+        :class="['pl-5 pb-2 font-16']"
         v-for="(item, i) in ['产品订单','定制设计','来图制作','订单跟踪','售后服务']"
         :key="i"
       >
@@ -27,12 +33,12 @@
           <div>{{item}}咨询</div>
         </div>
       </div>
-      <div class="d-flex align-center pt-4">
+      <div class="d-flex align-center pl-5 pt-4">
         <img :src="icon_tel" class="d-block mr-2" />
         <div>定制服务热线</div>
       </div>
-      <div class="font-18">{{$store.state.tel}}</div>
-      <img :src="qrcode" />
+      <div class="pl-5 font-18">{{$store.state.tel}}</div>
+      <img :src="qrcode" class="d-block pl-5 pb-4" />
     </div>
   </section>
 </template>
@@ -43,9 +49,14 @@ const icon_border = require('../static/float_bar/右边框.png')
 const icon_tel = require('../static/float_bar/右侧-电话.png')
 const icon_customer = require('../static/float_bar/右侧-联系客服.png')
 const qrcode = require('../static/float_bar/右侧二维码.png')
+
+import { mapState } from 'vuex'
+
 export default {
   data() {
     return {
+      leftBar: null,
+      rightBar: null,
       icon_mini,
       icon_border,
       icon_tel,
@@ -70,7 +81,33 @@ export default {
     }
   },
   methods: {
-
+    minimize(direction) {
+      if (direction === 'left') {
+        if (!this.isLeftMinimizi) {
+          this.leftBar.style.width = '20px'
+          this.leftBar.style.height = '20px'
+        } else {
+          this.leftBar.style.width = '187px'
+          this.leftBar.style.height = 'auto'
+        }
+      } else if (direction === 'right') {
+        if (!this.isRightMinimizi) {
+          this.rightBar.style.width = '22px'
+          this.rightBar.style.height = '20px'
+        } else {
+          this.rightBar.style.width = 'auto'
+          this.rightBar.style.height = 'auto'
+        }
+      }
+      this.$store.commit('set_floatbar_status', { direction })
+    }
+  },
+  computed: {
+    ...mapState(['isLeftMinimizi', 'isRightMinimizi'])
+  },
+  mounted() {
+    this.leftBar = document.querySelector('.left-bar');
+    this.rightBar = document.querySelector('.right-bar');
   }
 }
 </script>
@@ -82,6 +119,7 @@ export default {
   background-color: $c-primary;
   color: white;
   position: fixed;
+  overflow: hidden;
   top: 300px;
   .mini {
     position: absolute;
@@ -96,7 +134,6 @@ export default {
 }
 .left-bar {
   left: 0;
-  width: 187px;
   border-bottom-right-radius: 5px;
   .active {
     color: yellow;
