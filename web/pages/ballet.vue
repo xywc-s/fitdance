@@ -1,6 +1,6 @@
 <template>
   <section id="ballet" class="text-center">
-    <img class="max-w-100" :src="$route.path === '/ballet'?banner:shoes_banner" />
+    <img class="max-w-100" :src="$route.path === '/ballet/shoes'?shoes_banner: banner" />
 
     <nuxt-child></nuxt-child>
   </section>

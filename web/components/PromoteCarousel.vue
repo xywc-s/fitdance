@@ -85,8 +85,11 @@ export default {
     }
   },
   mounted() {
+    const _products = []
+    _products.push(...this.products)
     this.length = this.products.length
-    this.products.push(...this.products)
+    _products.push(...this.products)
+    this.products = [..._products]
 
     this.items = Array.from(Array(this.products.length).keys())
     this.bigLength = this.items.length
