@@ -22,7 +22,7 @@
           <div>商品尺寸：S/M/L/XL/XXL</div>
           <div>颜色分类：</div>
         </div>
-        <div class="btn text-center font-12 mb-7 mt-12">联系我们</div>
+        <div class="btn text-center font-12 mb-7 mt-12" @click="()=> $router.push('/about')">联系我们</div>
         <div>
           <img v-for="(icon,i) in icons" :src="icon" :key="i" class="mr-1" />
         </div>
@@ -49,7 +49,7 @@
         <div>2.全裙根据芭蕾裙尺寸进行调整，保证丰满度和重量的统一；</div>
         <div>3.背部采用搭扣设计，可根据您的需要进行调整。-140）； 成人（150-170）</div>
       </div>
-      <div class="bottom-btn mt-5">我要询盘</div>
+      <div class="bottom-btn mt-5" @click="()=> $router.push('/about')">我要询盘</div>
     </div>
   </section>
 </template>

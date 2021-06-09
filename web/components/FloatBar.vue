@@ -28,7 +28,7 @@
         v-for="(item, i) in ['产品订单','定制设计','来图制作','订单跟踪','售后服务']"
         :key="i"
       >
-        <div class="d-flex align-center pointer customer">
+        <div class="d-flex align-center pointer customer" @click="()=> $router.push('/about')">
           <img :src="icon_customer" class="d-block mx-2" />
           <div>{{item}}咨询</div>
         </div>

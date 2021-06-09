@@ -13,7 +13,7 @@
         </div>
         <div class="d-flex text-center font-14 mt-12">
           <div class="btn mr-3" @click="viewDetail()">查看更多</div>
-          <div class="btn">联系我们</div>
+          <div class="btn" @click="()=> $router.push('/about')">联系我们</div>
         </div>
       </div>
     </div>

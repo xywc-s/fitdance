@@ -2,7 +2,13 @@
   <section class="relative">
     <div v-if="title" class="products-title font-weight-bold absolute">{{title}}</div>
     <v-tabs right hide-slider active-class="tabs" v-model="model" @change="tabChange">
-      <v-tab class="tab" v-for="(tab,i) in tabs" :key="i" :href="`#tab-${i}`">{{tab}}</v-tab>
+      <v-tab
+        class="tab"
+        v-for="(tab,i) in tabs"
+        :key="i"
+        :href="`#tab-${i}`"
+        @click="tabClick(tab)"
+      >{{tab}}</v-tab>
     </v-tabs>
     <v-tabs-items v-model="model" class="mt-6" style="height:290px">
       <v-tab-item v-for="(tab, i) in tabs" :key="i" :value="`tab-${i}`">
@@ -90,6 +96,10 @@ export default {
     },
     tabChange() {
       this.currentOffset = 0;
+    },
+    tabClick(tab) {
+      if (tab === '定制服务')
+        this.$router.push('/about')
     }
   }
 }

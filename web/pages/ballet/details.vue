@@ -27,7 +27,7 @@
               <img :src="product" class="d-block" />
               <div class="ml-3 color-3 font-12">蓝色芭蕾裙</div>
             </div>
-            <div class="btn my-3 font-14">我要询盘</div>
+            <div class="btn my-3 font-14" @click="()=> $router.push('/about')">我要询盘</div>
           </div>
         </div>
       </div>
@@ -50,7 +50,7 @@
           <img src="~static/products/ballet/details/图层7.png" />
         </div>
       </div>
-      <div class="bottom-btn mt-5 ml-auto">我要询盘</div>
+      <div class="bottom-btn mt-5 ml-auto" @click="()=> $router.push('/about')">我要询盘</div>
     </div>
   </section>
 </template>

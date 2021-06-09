@@ -15,7 +15,7 @@
           </div>
           <div class="content" v-html="sub_content"></div>
           <div class="text-right">
-            <f-button>业务洽谈</f-button>
+            <f-button @click="()=> $router.push('/about')">业务洽谈</f-button>
           </div>
         </div>
         <img :src="about"></img>
@@ -26,7 +26,7 @@
         <div class="d-flex flex-column ml-16">
           <Culture class="pt-4 pb-6" :icon="false"></Culture>
           <div>
-            <f-button>业务洽谈</f-button>
+            <f-button @click="()=> $router.push('/about')">业务洽谈</f-button>
           </div>
         </div>
       </div>
