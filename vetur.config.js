@@ -3,7 +3,7 @@ module.exports = {
     "vetur.experimental.templateInterpolationService": true
   },
   projects: [
-    './serve',
+    './server',
     './admin',
     './web'
   ]

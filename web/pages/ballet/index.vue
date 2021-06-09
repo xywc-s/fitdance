@@ -28,12 +28,21 @@
         </v-col>
         <div class="bg-border"></div>
       </v-row>
+      <div
+        class="pointer color-primary text-right mt-2"
+        @click="()=> $router.push('/ballet/details')"
+      >
+        <span class="btn-border">
+          查看更多/
+          <span class="font-12">MORE</span>
+        </span>
+      </div>
 
       <section class="mt-12 profession">
         <div class="d-flex justify-space-between align-end">
           <FTitle>专业芭蕾舞裙</FTitle>
           <div class="d-flex">
-            <div class="btn">联系我们</div>
+            <div class="btn" @click="()=> $router.push('/ballet/details')">查看更多</div>
             <div class="btn">我要定制</div>
           </div>
         </div>
@@ -70,6 +79,7 @@
           <div class="text-b">
             <div>芭蕾，于法国发展流行并逐渐职业化，十八世纪在法国日臻完美，到十九世纪末期，在俄罗斯进入最繁荣的时代</div>
           </div>
+          <div class="btn" @click="()=> $router.push('/ballet/details')">芭蕾专区</div>
         </div>
       </section>
 
@@ -159,6 +169,24 @@ export default {
     top: 90px;
     right: 163px;
   }
+  .btn {
+    position: absolute;
+    width: 160px;
+    height: 30px;
+    line-height: 30px;
+    right: 132px;
+    bottom: 60px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+    font-size: 14px;
+    &:hover {
+      color: white;
+      background-color: $c-primary;
+      border: none;
+      cursor: pointer;
+    }
+  }
 }
 
 .profession {
@@ -175,5 +203,8 @@ export default {
       cursor: pointer;
     }
   }
+}
+.btn-border {
+  border-bottom: 1px solid $c-primary;
 }
 </style>

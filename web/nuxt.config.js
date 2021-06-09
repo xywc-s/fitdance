@@ -32,6 +32,16 @@ export default {
     port: 3001
   },
 
+  router: {
+    scrollBehavior(to, from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition
+      } else {
+        return { y: 0 }
+      }
+    }
+  },
+
   pageTransition: 'page',
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
