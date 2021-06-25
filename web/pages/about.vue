@@ -12,12 +12,17 @@
               ></CompanyInfo>
             </div>
             <div class="text-right">
-              <button class="mr-2 mt-12 button prim">在线咨询</button>
+              <v-tooltip top color="rgba(255, 255, 255, 1)" max-width="270">
+                <template v-slot:activator="{on, attrs}">
+                  <button class="mr-2 mt-12 button prim" v-bind="attrs" v-on="on">在线咨询</button>
+                </template>
+                <v-img :src="$store.state.qrcode"></v-img>
+              </v-tooltip>
             </div>
           </v-col>
           <v-col :cols="6" class="pl-16">
-            <v-form ref="form" class="text-center mt-6">
-              <template v-for="{key,label} in items">
+            <v-form ref="form" class="text-center mt-6" lazy-validation @submit="submitHandle">
+              <template v-for="{key,label, rules} in items">
                 <div class="relative mx-auto" style="width: 292px">
                   <span class="absolute prefix">{{label}}</span>
                   <v-textarea
@@ -29,10 +34,18 @@
                     rows="4"
                     class="font-14"
                   ></v-textarea>
-                  <v-text-field v-else v-model="form[key]" dense solo flat class="mb-2 font-14"></v-text-field>
+                  <v-text-field
+                    v-else
+                    v-model="form[key]"
+                    :rules="rules"
+                    dense
+                    solo
+                    flat
+                    class="mb-2 font-14"
+                  ></v-text-field>
                 </div>
               </template>
-              <button class="mt-4 button blue">提交</button>
+              <v-btn class="mt-2 button blue" type="submit" :loading="loading">提交</v-btn>
             </v-form>
           </v-col>
         </v-row>
@@ -55,6 +68,14 @@
       <div class="mb-16" style="width:100%;height:1px"></div>
       <Products title="相关产品" class="mb-10"></Products>
     </div>
+    <v-snackbar
+      v-model="snackbar"
+      app
+      top
+      absolute
+      style="top:60px"
+      :color="snackbarColor"
+    >{{ message }}</v-snackbar>
   </section>
 </template>
 
@@ -64,15 +85,28 @@ export default {
   data() {
     return {
       image,
+      loading: false,
+      snackbar: false,
+      message: '',
+      snackbarColor: '',
       items: [{
         label: '姓名',
-        key: 'name'
+        key: 'name',
+        rules: [
+          v => !!v || '请留下一个称呼'
+        ]
       }, {
         label: '电话',
-        key: 'tel'
+        key: 'tel',
+        rules: [
+          v => !!v || '请留下一个联系方式'
+        ]
       }, {
         label: '邮箱',
-        key: 'email'
+        key: 'email',
+        rules: [
+          v => !!v ? (/.+@.+/.test(v) || '必须是一个有效的邮箱地址') : true,
+        ],
       }, {
         label: '备注',
         key: 'remark'
@@ -90,6 +124,32 @@ export default {
     validate() {
       this.$refs.form.validate()
     },
+    async submitHandle(e) {
+      e.preventDefault()
+      const val = this.$refs.form.validate()
+      console.log('a', val)
+      if (!this.$refs.form.validate()) return
+      try {
+        this.loading = true
+        const { status } = await this.$email.send(this.form)
+        this.loading = false
+        if (status === 200) console.log('发送成功');
+
+        this.message = '提交成功'
+        this.snackbarColor = 'rgba(76,175,80,0.95)'
+        this.snackbar = true
+
+        this.$refs.form.reset()
+
+      } catch (error) {
+        this.loading = false
+
+        this.message = error
+        this.snackbarColor = 'rgba(229,57,53,0.95)'
+        this.snackbar = true
+
+      }
+    }
   }
 }
 </script>
