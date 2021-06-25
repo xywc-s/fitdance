@@ -121,13 +121,8 @@ export default {
     }
   },
   methods: {
-    validate() {
-      this.$refs.form.validate()
-    },
     async submitHandle(e) {
       e.preventDefault()
-      const val = this.$refs.form.validate()
-      console.log('a', val)
       if (!this.$refs.form.validate()) return
       try {
         this.loading = true
