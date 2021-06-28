@@ -7,7 +7,7 @@
     <main>
       <nuxt />
     </main>
-    <footer class="py-8 color-bg-gray">
+    <footer class="pt-8 pb-4 color-bg-gray">
       <section class="container-fuild d-flex justify-space-around">
         <div>
           <div class="text-h6 color-primary">联系我们</div>
@@ -26,6 +26,7 @@
         </div>
         <company-info showSubContact></company-info>
       </section>
+      <Copyright></Copyright>
     </footer>
   </v-app>
 </template>
