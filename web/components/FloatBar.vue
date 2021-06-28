@@ -7,12 +7,15 @@
       <img :src="icon_mini" class="mini" @click.stop="minimize('left')" />
       <div class="pa-5 font-22">其他专区</div>
       <div
-        :class="['pl-5 pb-4 font-16', {'active': $route.path === path}]"
+        :class="['pl-5 pb-4 font-16', {'active': nav === '芭蕾专区'? $route.path === path || $route.path.includes('/ballet/details') : $route.path === path}]"
         v-for="({nav, path}, i) in navs"
         :key="i"
       >
         <div class="d-flex align-center pointer" @click="$router.push(path)">
-          <v-icon class="mr-2" :color="$route.path === path?'yellow':'white'">mdi-star</v-icon>
+          <v-icon
+            class="mr-2"
+            :color="nav === '芭蕾专区'? ($route.path === path || $route.path.includes('/ballet/details') ?'yellow':'white'): ($route.path === path?'yellow':'white')"
+          >mdi-star</v-icon>
           {{nav}}
         </div>
       </div>
@@ -64,7 +67,7 @@ export default {
       qrcode,
       navs: [{
         nav: '芭蕾专区',
-        path: '/ballet'
+        path: '/ballet',
       }, {
         nav: '练功服专区',
         path: '/dancing'

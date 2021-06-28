@@ -1,5 +1,6 @@
 <template>
   <section id="details">
+    <FloatBar></FloatBar>
     <div class="d-flex container-fuild text-left mt-12 mb-10">
       <div>
         <div class="category">
@@ -66,11 +67,8 @@ const new_publish_products = [
   require('../../static/products/ballet/details/新品07.png')
 ]
 export default {
-  asyncData({ params, query, route }) {
-    console.log(route.params);
-    console.log(route.query);
+  asyncData({ params }) {
     console.log(params);
-    console.log(query);
   },
   data() {
     return {

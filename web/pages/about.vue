@@ -12,10 +12,18 @@
               ></CompanyInfo>
             </div>
             <div class="text-right">
-              <v-tooltip top color="rgba(255, 255, 255, 1)" max-width="270">
-                <template v-slot:activator="{on, attrs}">
-                  <button class="mr-2 mt-12 button prim" v-bind="attrs" v-on="on">在线咨询</button>
-                </template>
+              <button class="mr-2 mt-12 button prim">在线咨询</button>
+
+              <v-tooltip
+                eager
+                top
+                open-on-click
+                :open-on-hover="false"
+                activator="button.prim"
+                open-delay="500"
+                color="rgba(255, 255, 255, 1)"
+                max-width="270"
+              >
                 <v-img :src="$store.state.qrcode"></v-img>
               </v-tooltip>
             </div>
@@ -128,13 +136,16 @@ export default {
         this.loading = true
         const { status } = await this.$email.send(this.form)
         this.loading = false
-        if (status === 200) console.log('发送成功');
+        if (status === 200) {
+          this.message = '提交成功'
+          this.snackbarColor = 'rgba(76,175,80,0.95)'
 
-        this.message = '提交成功'
-        this.snackbarColor = 'rgba(76,175,80,0.95)'
+          this.$refs.form.reset()
+        } else {
+          this.message = '提交失败'
+          this.snackbarColor = 'rgba(229,57,53,0.95)'
+        }
         this.snackbar = true
-
-        this.$refs.form.reset()
 
       } catch (error) {
         this.loading = false
