@@ -24,7 +24,8 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: '/favicon.ico' }
+      { rel: 'stylesheet', href: '/favicon.ico' },
+      { name="baidu-site-verification", content="code-78u2vOur6f" }
     ]
   },
 
