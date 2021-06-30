@@ -39,13 +39,6 @@ export default {
   },
   computed: {
     ...mapState(['tel', 'qrcode'])
-  },
-  mounted() {
-    const headTag = document.querySelector('head')
-    const baiduSiteVerifyTag = document.createElement('meta')
-    baiduSiteVerifyTag.setAttribute('name', 'baidu-site-verification')
-    baiduSiteVerifyTag.setAttribute('content', 'code-78u2vOur6f')
-    headTag.prepend(baiduSiteVerifyTag)
   }
 }
 </script>
