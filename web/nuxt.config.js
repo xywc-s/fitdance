@@ -20,8 +20,7 @@ export default {
       // { name: 'viewport', content: 'width=device-width' },
       { name: 'keywords', content: 'fitdance,斐丹丝,练功服,舞蹈裙,芭蕾舞裙,定制,厂家,源头工厂' },
       { name: 'author', content: '易长松 | Erain-s | xywc_s@foxmail.com' },
-      { hid: 'description', name: 'description', content: '斐丹丝官方网站,提供最专业的舞蹈服、练功服、芭蕾舞裙服装定制与生产服务,为千万家舞蹈培训机构和学校提供满意的产品.' },
-      { name: "baidu-site-verification", content: "code-78u2vOur6f" }
+      { hid: 'description', name: 'description', content: '斐丹丝官方网站,提供最专业的舞蹈服、练功服、芭蕾舞裙服装定制与生产服务,为千万家舞蹈培训机构和学校提供满意的产品.' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
