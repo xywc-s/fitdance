@@ -83,7 +83,7 @@ export default new Router({
           }
         },
         {
-          path: 'product/seo',
+          path: 'product-seo',
           component: ()=>import('@/views/product/seo.vue'),
           meta: {
             title: 'SEO设置',
