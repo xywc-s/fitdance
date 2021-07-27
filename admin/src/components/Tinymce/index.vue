@@ -62,6 +62,7 @@ import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import { SettingsModule } from '@/store/modules/settings'
 import EditorImageUpload, { IUploadObject } from './components/EditorImage.vue'
 import { plugins, toolbar } from './config'
+import { AppModule } from '@/store/modules/app'
 
 const defaultId = () => 'vue-tinymce-' + +new Date() + ((Math.random() * 1000).toFixed(0) + '')
 
@@ -77,7 +78,7 @@ export default class extends Vue {
   @Prop({ default: defaultId }) private id!: string
   @Prop({ default: () => [] }) private toolbar!: string[]
   @Prop({ default: 'file edit insert view format table' }) private menubar!: string
-  @Prop({ default: '360px' }) private height!: string | number
+  @Prop({ default: '800px' }) private height!: string | number
   @Prop({ default: 'auto' }) private width!: string | number
 
   private hasChange = false
@@ -152,10 +153,10 @@ export default class extends Vue {
     }
   }
 
-  private imageSuccessCBK(arr: IUploadObject[]) {
+  private imageSuccessCBK(arr: string[]) {
     const tinymce = (window as any).tinymce.get(this.id)
-    arr.forEach(v => {
-      tinymce.insertContent(`<img class="wscnph" src="${v.url}" >`)
+    arr.forEach(key => {
+      tinymce.insertContent(`<img class="wscnph" src="${AppModule.image_domain}/${key}" >`)
     })
   }
 }

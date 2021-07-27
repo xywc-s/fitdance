@@ -2,6 +2,15 @@ import { UserModule } from '@/store/modules/user'
 import axios from 'axios'
 import { Message, MessageBox, Notification } from 'element-ui'
 
+interface serverResponseData {
+  code: number,
+  data?: any[] | any,
+  message?: string,
+  title?: string,
+  total?: number,
+  token?: string
+}
+
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000
@@ -32,14 +41,14 @@ service.interceptors.response.use(
     // code == 50004: invalid user (user not exist)
     // code == 50005: username or password is incorrect
     // You can change this part for your own usage.
-    const res = response.data
-    if (res.code !== 20000) {
-      Message({
-        message: res.message || 'Error',
+    const {token, data, code, message, title, total} = response.data as serverResponseData
+    if (code !== 20000) {
+      Notification({
         type: 'error',
-        duration: 5 * 1000
+        title: title || '',
+        message: message||''
       })
-      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
+      if (code === 50008 || code === 50012 || code === 50014) {
         MessageBox.confirm(
           '你已被登出，可以取消继续留在该页面，或者重新登录',
           '确定登出',
@@ -53,10 +62,10 @@ service.interceptors.response.use(
           location.reload() // To prevent bugs from vue-router
         })
       }
-      return Promise.reject(new Error(res.message || 'Error'))
+      return Promise.reject(new Error(message || 'Error'))
     } else {
-      if(res.message) Notification.success(response.data.message)
-      return res
+      if(message) Notification.success(message)
+      return {data, token, total}
     }
   },
   (error) => {

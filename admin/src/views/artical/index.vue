@@ -7,9 +7,6 @@
       :page.sync="page"
       :option="option"
       @on-load="listLoad"
-      @row-save="rowSave"
-      @row-update="rowUpdate"
-      @row-del="rowDel"
       @refresh-change="refresh"
     >
       <div slot="menuLeft">

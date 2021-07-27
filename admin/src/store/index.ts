@@ -1,3 +1,4 @@
+import { IProductState } from '@/store/modules/product';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { IAppState } from './modules/app';
@@ -11,7 +12,8 @@ export interface IRootState {
   app: IAppState
   user: IUserState
   settings: ISettingsState
-  file: IFileState
+  file: IFileState,
+  product: IProductState
 }
 
 // Declare empty store first, dynamically register all modules later.

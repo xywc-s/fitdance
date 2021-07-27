@@ -5,6 +5,7 @@ module.exports = {
   projects: [
     './server',
     './admin',
-    './web'
+    './web',
+    './manager'
   ]
 }

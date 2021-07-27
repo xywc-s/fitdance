@@ -9,35 +9,30 @@
     >上传</el-button>
     <el-dialog :visible.sync="dialogVisible" :modal-append-to-body="false">
       <el-upload
-        :multiple="true"
-        :file-list="defaultFileList"
+        ref="upload"
+        multiple
         :show-file-list="true"
-        :on-remove="handleRemove"
+        :auto-upload="false"
+        :file-list="defaultFileList"
+        :data="uploadData"
         :on-success="handleSuccess"
-        :before-upload="beforeUpload"
+        :before-upload="file=>uploadData.key = `product/details/${Date.now()}/${file.name}`"
         class="editor-slide-upload"
-        action="https://httpbin.org/post"
+        action="//up-z2.qiniup.com"
         list-type="picture-card"
       >
-        <el-button size="small" type="primary">Click upload</el-button>
+        <el-button size="small" type="primary">点击上传</el-button>
       </el-upload>
-      <el-button @click="dialogVisible = false">Cancel</el-button>
-      <el-button type="primary" @click="handleSubmit">Confirm</el-button>
+      <el-button @click="dialogVisible = false">取消</el-button>
+      <el-button type="primary" @click="handleSubmit">确认</el-button>
     </el-dialog>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
-import { ElUploadInternalRawFile } from 'element-ui/types/upload'
-
-export interface IUploadObject {
-  hasSuccess: boolean
-  uid: number
-  url: string
-  width: number
-  height: number
-}
+import { Component, Prop, Ref, Vue } from 'vue-property-decorator'
+import { getUploadToken } from '@/api/files'
+import { AxiosResponse } from 'axios'
 
 @Component({
   name: 'EditorImageUpload'
@@ -45,61 +40,41 @@ export interface IUploadObject {
 export default class extends Vue {
   @Prop({ required: true }) private color!: string
 
+  @Ref() readonly upload!: HTMLFormElement
+
   private dialogVisible = false
-  private listObj: { [key: string]: IUploadObject } = {}
+  private cb_data: string[] = []
   private defaultFileList = []
 
-  private checkAllSuccess() {
-    return Object.keys(this.listObj).every(item => this.listObj[item].hasSuccess)
+  uploadData = {
+    token: '',
+    key: ''
   }
 
-  private handleSubmit() {
-    const arr = Object.keys(this.listObj).map(v => this.listObj[v])
-    if(!this.checkAllSuccess()) {
-      this.$message('Please wait for all images to be uploaded successfully. If there is a network problem, please refresh the page and upload again!')
-      return
+  get uploaded(): Boolean {
+    if(this.upload.uploadFiles.length > 0) {
+      return this.upload.uploadFiles.every((file: any) => file.status === 'success')
     }
-    this.$emit('success-callback', arr)
-    this.listObj = {}
-    this.defaultFileList = []
-    this.dialogVisible = false
+    return false
   }
 
-  private handleSuccess(response: any, file: ElUploadInternalRawFile) {
-    const uid = file.uid
-    const objKeyArr = Object.keys(this.listObj)
-    for(let i = 0, len = objKeyArr.length; i < len; i++) {
-      if(this.listObj[objKeyArr[i]].uid === uid) {
-        this.listObj[objKeyArr[i]].url = response.files.file
-        this.listObj[objKeyArr[i]].hasSuccess = true
-        return
-      }
-    }
+  private async handleSubmit() {
+    const { token } = await getUploadToken() as AxiosResponse["data"]
+    this.uploadData.token = token
+    this.$nextTick(() => {
+      this.upload.submit()
+    })
   }
 
-  private handleRemove(file: ElUploadInternalRawFile) {
-    const uid = file.uid
-    const objKeyArr = Object.keys(this.listObj)
-    for(let i = 0, len = objKeyArr.length; i < len; i++) {
-      if(this.listObj[objKeyArr[i]].uid === uid) {
-        delete this.listObj[objKeyArr[i]]
-        return
-      }
-    }
-  }
-
-  private beforeUpload(file: ElUploadInternalRawFile) {
-    const fileName = file.uid
-    const img = new Image()
-    img.src = window.URL.createObjectURL(file)
-    img.onload = () => {
-      this.listObj[fileName] = {
-        hasSuccess: false,
-        uid: file.uid,
-        url: '',
-        width: img.width,
-        height: img.height
-      }
+  private handleSuccess(response: any, file: any) {
+    console.log('upload file', file);
+    this.cb_data.push(file.response.key)
+    if(this.uploaded) {
+      console.log('uploaded');
+      this.$emit('success-callback', this.cb_data)
+      this.cb_data = []
+      this.defaultFileList = []
+      this.dialogVisible = false
     }
   }
 }

@@ -50,6 +50,49 @@ export default new Router({
       ]
     },
     {
+      path: '/product',
+      component: Layout,
+      meta: {
+        title: '产品管理',
+        icon: 's-goods'
+      },
+      children: [
+        {
+          path: 'manager',
+          component: ()=>import('@/views/product/index.vue'),
+          meta: {
+            title: '产品列表',
+            icon: 's-order'
+          }
+        },
+        {
+          path: 'manager/edit',
+          name: 'product-edit',
+          component: ()=>import('@/views/product/edit.vue'),
+          meta: {
+            hidden: true,
+            title: '产品编辑',
+          }
+        },
+        {
+          path: 'category',
+          component: ()=>import('@/views/product/category.vue'),
+          meta: {
+            title: '产品分类',
+            icon: 's-grid'
+          }
+        },
+        {
+          path: 'product/seo',
+          component: ()=>import('@/views/product/seo.vue'),
+          meta: {
+            title: 'SEO设置',
+            icon: 's-tools'
+          }
+        }
+      ]
+    },
+    {
       path: '/file',
       component: Layout,
       redirect: '/file/manager',
@@ -59,7 +102,7 @@ export default new Router({
           component: () => import('@/views/file/index.vue'),
           meta: {
             title: '文件管理',
-            icon: 'example'
+            icon: 'picture'
           }
         },
         {
@@ -68,7 +111,6 @@ export default new Router({
           meta: {
             hidden: true,
             title: '文件上传',
-            icon: 'example'
           }
         }
       ]
@@ -94,7 +136,6 @@ export default new Router({
           meta: {
             hidden:true,
             title: '文章编辑',
-            icon: 'link'
           }
         }
       ]
@@ -109,7 +150,7 @@ export default new Router({
           component: () => import('@/views/user/index.vue'),
           meta: {
             title: '用户管理',
-            icon: 'user'
+            icon: 's-custom'
           }
         }
       ]
