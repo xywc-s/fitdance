@@ -11,7 +11,7 @@ export class SettingService extends TypeOrmCrudService<Setting>{
   }
 
   async getSetting(){
-    const setting = await this.repo.findOneOrFail()
+    const setting = await this.repo.findOne()
     if(setting) return setting
     return {
       seo_title: '',
