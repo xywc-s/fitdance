@@ -19,18 +19,20 @@ export class AppController {
         code: 20000,
         data: {
           dirOptions,
+          image_domain,
           seo: {
             seo_title, 
             seo_description, 
             seo_keywords
-          },
-          image_domain
+          }
         }
       }
     } catch (error) {
       return {
         code: 50001,
-        message: error.message
+        message: error.message,
+        title: error.details,
+        details: error
       }
     }
   }
