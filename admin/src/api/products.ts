@@ -6,7 +6,7 @@ export const createProduct = (params: any) => request.post('/products', params)
 
 export const updateProduct = (params: any) => request.put('/products', params)
 
-export const delProduct = (id) => request.delete(`/products/${id}`)
+export const delProduct = (id: number) => request.delete(`/products/${id}`)
 
 
 export const getCategories = () => request.get('/categories')

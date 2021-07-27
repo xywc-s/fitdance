@@ -60,7 +60,7 @@ import 'tinymce/plugins/wordcount'
 import TinymceEditor from '@tinymce/tinymce-vue' // TinyMCE vue wrapper
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import { SettingsModule } from '@/store/modules/settings'
-import EditorImageUpload, { IUploadObject } from './components/EditorImage.vue'
+import EditorImageUpload from './components/EditorImage.vue'
 import { plugins, toolbar } from './config'
 import { AppModule } from '@/store/modules/app'
 

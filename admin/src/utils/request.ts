@@ -41,14 +41,16 @@ service.interceptors.response.use(
     // code == 50004: invalid user (user not exist)
     // code == 50005: username or password is incorrect
     // You can change this part for your own usage.
-    const {token, data, code, message, title, total} = response.data as serverResponseData
-    if (code !== 20000) {
+    const res = response.data
+    // const {token, data, code, message, title, total} = res 
+
+    if (res.code !== 20000) {
       Notification({
         type: 'error',
-        title: title || '',
-        message: message||''
+        title: res.title || '',
+        message: res.message||''
       })
-      if (code === 50008 || code === 50012 || code === 50014) {
+      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
         MessageBox.confirm(
           '你已被登出，可以取消继续留在该页面，或者重新登录',
           '确定登出',
@@ -62,10 +64,10 @@ service.interceptors.response.use(
           location.reload() // To prevent bugs from vue-router
         })
       }
-      return Promise.reject(new Error(message || 'Error'))
+      return Promise.reject(new Error(res.message || 'Error'))
     } else {
-      if(message) Notification.success(message)
-      return {data, token, total}
+      if(res.message) Notification.success(res.message)
+      return res
     }
   },
   (error) => {
