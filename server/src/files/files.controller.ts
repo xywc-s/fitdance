@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
 import { CrudController } from '@nestjsx/crud';
 import { FilesService } from 'src/files/files.service';
 import { getRepository } from 'typeorm';
-import { File } from './../models/file';
+import { File } from '../models/file';
 
 @Controller('files')
 export class FilesController implements CrudController<File> {

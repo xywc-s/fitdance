@@ -4,14 +4,12 @@
  * @Date: 2020-11-30 13:47:34
  */
 import { Body, Controller, Delete, Get, Post, Put, Query } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
 import { CrudController } from '@nestjsx/crud';
 import loginDTO from 'src/dto/auth';
 import { getRepository } from 'typeorm';
 import { User } from '../models/user';
 import { UsersService } from './users.service';
 
-@ApiTags('用户')
 @Controller('users')
 export class UsersController implements CrudController<User> {
   constructor(public service: UsersService){}

@@ -1,0 +1,62 @@
+import { Category } from './category';
+import { File } from './file';
+import { AfterLoad, BeforeInsert, BeforeUpdate, Column, Entity, Index, JoinColumn, OneToMany, OneToOne, } from 'typeorm';
+import { BaseModel } from './base.model';
+
+@Entity()
+export class Product extends BaseModel {
+  @Index()
+  @Column({
+    comment: '产品标题',
+    length: 120
+  })
+  title: string
+
+  @Column({
+    comment: '产品属性',
+    array: true
+  })
+  attrs: string
+
+  @OneToOne(()=> Category, {
+    'eager': true
+  })
+  @JoinColumn()
+  category: Category
+
+  @Column({
+    comment: 'seo标题',
+    length: 20,
+    nullable: true
+  })
+  seo_title: string
+
+  @Column({
+    comment: 'seo描述',
+    length: 120,
+    nullable: true
+  })
+  seo_description: string
+
+  @Column({
+    comment: 'seo关键词',
+    length: 48,
+    nullable: true
+  })
+  seo_keywords: string
+
+  @Column({
+    comment: '产品详情',
+    type: 'text',
+    nullable: true
+  })
+  details: string
+
+  @OneToMany(()=> File, file => file.product , {
+    eager: true,
+    cascade: true,
+    onDelete: 'CASCADE'
+  })
+  images: File[]
+
+}

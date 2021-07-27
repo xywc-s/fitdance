@@ -1,25 +1,56 @@
-import { Controller, Get } from '@nestjs/common';
+import { SettingService } from './setting/setting.service';
+import { getRepository } from 'typeorm';
+import { Setting } from './models/setting';
+import { Controller, Get, Param, Put } from '@nestjs/common';
 import { AppService } from './app.service';
 import { DIROPTIONS } from './models/file';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
+  constructor(private readonly appService: AppService,
+    private readonly settingService: SettingService
+  ) {}
 
   @Get('/statics')
-  getStaticsData(){
+  async getStaticsData(){
     const dirOptions = DIROPTIONS
-
-    return {
-      code: 20000,
-      data: {
-        dirOptions
+    const {seo_title, seo_description,seo_keywords} = await this.settingService.getSetting()
+    const image_domain = process.env.QN_DOMAIN
+    try {
+      return {
+        code: 20000,
+        data: {
+          dirOptions,
+          seo: {
+            seo_title, 
+            seo_description, 
+            seo_keywords
+          },
+          image_domain
+        }
+      }
+    } catch (error) {
+      return {
+        code: 50001,
+        message: error.message
       }
     }
   }
+
+  // @Put('/setting')
+  // async updateSeoSetting(@Param() params){
+  //   try{
+  //     const setting = getRepository(Setting).create(params)
+  //     await Setting.save(setting)
+  //     return {
+  //       code: 20000,
+  //       message: '设置成功！'
+  //     }
+  //   }catch(e){
+  //     return {
+  //       code: 50001,
+  //       message: e.message
+  //     }
+  //   }
+  // }
 }

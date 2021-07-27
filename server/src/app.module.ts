@@ -1,5 +1,5 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: xywc_s
  * @Date: 2020-11-27 14:10:11
  */
@@ -11,10 +11,15 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ArticalsController } from './articals/articals.controller';
 import { ArticalsModule } from './articals/articals.module';
+import { CategoryController } from './category/category.controller';
+import { CategoryModule } from './category/category.module';
 import { FilesController } from './files/files.controller';
 import { FilesModule } from './files/files.module';
+import { SettingModule } from './setting/setting.module';
+import { SettingService } from './setting/setting.service';
 import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -23,11 +28,11 @@ import { UsersModule } from './users/users.module';
       imports:[ConfigModule],
       useFactory: (config: ConfigService) => ({
         type: 'postgres',
-        database: 'fitdance',
-        host: config.get('PG_HOST'),
-        port: config.get('PG_PORT'),
-        username: config.get('PG_USER'),
-        password: config.get('PG_PWD'),
+        database: config.get('TYPEORM_DATABASE'),
+        host: config.get('TYPEORM_HOST'),
+        port: config.get('TYPEORM_PORT'),
+        username: config.get('TYPEORM_USERNAME'),
+        password: config.get('TYPEORM_PASSWORD'),
         entities: [
           __dirname+'/models/*.js'
         ],
@@ -51,8 +56,17 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     FilesModule,
     ArticalsModule,
+    CategoryModule,
+    SettingModule,
+    ProductModule
   ],
-  controllers: [AppController, UsersController, FilesController, ArticalsController],
+  controllers: [
+    AppController, 
+    UsersController, 
+    FilesController, 
+    ArticalsController,
+    CategoryController
+  ],
   providers: [AppService],
 })
 export class AppModule {

@@ -8,7 +8,7 @@ export class BaseModel extends BaseEntity {
   created_at
 
   @UpdateDateColumn()
-  Updated_at
+  updated_at
 
   @DeleteDateColumn()
   deleted_at

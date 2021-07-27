@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Post, Put, Query } from '@nestjs/common';
 import { CrudController } from '@nestjsx/crud';
 import { getRepository } from 'typeorm';
-import { Artical } from './../models/artical';
+import { Artical } from '../models/artical';
 import { ArticalsService } from './articals.service';
 
 @Controller('articals')

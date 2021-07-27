@@ -1,4 +1,5 @@
-import { Column, Entity } from "typeorm";
+import { Product } from './product';
+import { Column, Entity, ManyToOne } from "typeorm";
 import { BaseModel } from './base.model';
 
 export enum FileType {
@@ -44,4 +45,9 @@ export class File extends BaseModel {
     comment: '文件地址'
   })
   src:string
+
+  @ManyToOne(()=> Product, product=> product.images, {
+    'onDelete': 'CASCADE'
+  })
+  product: Product
 }

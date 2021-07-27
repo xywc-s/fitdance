@@ -56,13 +56,13 @@ export class FilesService extends TypeOrmCrudService<File> {
     }
   }
 
-  serialize(files: any | Array<any>, dir:string){
+  serialize(files: any | Array<any>, dir:string = ''){
     return files.map(file => {
       return {
         filename: file.name,
         dir: dir,
         type: this.typeFormatter(file.type),
-        src: `${process.env.QN_DOMAIN}/${dir}/${file.name}`
+        src: `${process.env.QN_DOMAIN}${dir?'/'+dir: ''}/${file.name}`
       }
     })
   }
@@ -80,6 +80,19 @@ export class FilesService extends TypeOrmCrudService<File> {
           if(respInfo.statusCode !== 200) throw new Error(respBody.error)
         }
       })
+  }
+
+  async storeProductPictures(files:any[], options?: { saved?: boolean}){
+    const images = files.map(file => {
+      return this.repo.create({
+        filename: file.name,
+        src: `${process.env.QN_DOMAIN}/${file.name}`
+      })
+    })
+    if( options?.saved )
+      return await this.repo.save(images)
+    
+    return images
   }
 
 }
