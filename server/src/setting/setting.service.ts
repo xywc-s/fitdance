@@ -11,6 +11,12 @@ export class SettingService {
   ){}
 
   async getSetting(){
-    return this.setting.findOne()
+    const setting = await this.setting.findOneOrFail()
+    if(setting) return setting
+    return {
+      seo_title: '',
+      seo_description: '',
+      seo_keywords: ''
+    }
   }
 }

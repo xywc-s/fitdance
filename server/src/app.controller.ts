@@ -1,6 +1,4 @@
 import { SettingService } from './setting/setting.service';
-import { getRepository } from 'typeorm';
-import { Setting } from './models/setting';
 import { Controller, Get, Param, Put } from '@nestjs/common';
 import { AppService } from './app.service';
 import { DIROPTIONS } from './models/file';
@@ -36,21 +34,4 @@ export class AppController {
       }
     }
   }
-
-  // @Put('/setting')
-  // async updateSeoSetting(@Param() params){
-  //   try{
-  //     const setting = getRepository(Setting).create(params)
-  //     await Setting.save(setting)
-  //     return {
-  //       code: 20000,
-  //       message: '设置成功！'
-  //     }
-  //   }catch(e){
-  //     return {
-  //       code: 50001,
-  //       message: e.message
-  //     }
-  //   }
-  // }
 }
