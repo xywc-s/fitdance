@@ -14,9 +14,9 @@ export class AppController {
   @Get('/statics')
   async getStaticsData(){
     const dirOptions = DIROPTIONS
-    const {seo_title, seo_description,seo_keywords} = await this.settingService.getSetting()
     const image_domain = process.env.QN_DOMAIN
     try {
+      const {seo_title, seo_description,seo_keywords} = await this.settingService.getSetting()
       return {
         code: 20000,
         data: {
