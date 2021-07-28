@@ -1,6 +1,28 @@
 <template>
   <div class="pa-20">
-    <el-button type="primary" size="small" @click="()=> dialogShow = true">创建分类</el-button>
+    <el-row type="flex" align="bottom">
+      <el-button type="primary" size="small" @click="()=> dialogShow = true">创建分类</el-button>
+      <div class="ml-30 tip" style="font-size:12px;">
+        <div class="mb-5">
+          <span>
+            <i class="el-icon-warning"></i>
+            删除父级分类，将同时删除其下所有子分类；
+          </span>
+        </div>
+        <div class="mb-5">
+          <span>
+            <i class="el-icon-warning"></i>
+            删除分类的同时会同步删除分类下所有的产品；
+          </span>
+        </div>
+        <div class="mb-5">
+          <span>
+            <i class="el-icon-warning"></i>
+            若要保留产品仅删除分类，应先将分类下的所有产品移动到其他分类后，再删除分类。
+          </span>
+        </div>
+      </div>
+    </el-row>
     <el-divider></el-divider>
     <el-tree
       style="width:500px"

@@ -19,7 +19,10 @@ export class Product extends BaseModel {
   attrs: string
 
   @OneToOne(()=> Category, {
-    'eager': true
+    'eager': true,
+    'cascade': true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
   })
   @JoinColumn()
   category: Category
