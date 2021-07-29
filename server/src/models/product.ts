@@ -1,6 +1,6 @@
 import { Category } from './category';
 import { File } from './file';
-import { AfterLoad, BeforeInsert, BeforeUpdate, Column, Entity, Index, JoinColumn, OneToMany, OneToOne, } from 'typeorm';
+import { AfterLoad, BeforeInsert, BeforeUpdate, Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { BaseModel } from './base.model';
 
 @Entity()
@@ -18,13 +18,18 @@ export class Product extends BaseModel {
   })
   attrs: string
 
-  @OneToOne(()=> Category, {
-    'eager': true,
-    'cascade': true,
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
+  @Column({
+    comment: '新品',
+    type: 'boolean',
+    default: 0
   })
-  @JoinColumn()
+  is_new: boolean
+
+  @ManyToOne(()=> Category, category=> category.products, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+    eager: true
+  })
   category: Category
 
   @Column({

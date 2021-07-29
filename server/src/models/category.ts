@@ -1,5 +1,6 @@
+import { Product } from './product';
 import { BaseModel } from './base.model';
-import { Column,Entity, Tree, TreeChildren, TreeParent } from 'typeorm';
+import { Column,Entity, OneToMany, Tree, TreeChildren, TreeParent } from 'typeorm';
 
 @Entity()
 @Tree('closure-table')
@@ -20,4 +21,11 @@ export class Category extends BaseModel {
     cascade: ['remove', 'insert','recover','update','soft-remove']
   })
   children: Category[]
+
+  @OneToMany(()=> Product, product=>product.category, {
+    cascade: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+  })
+  products: Product[]
 }

@@ -38,6 +38,9 @@
             >
               <el-input v-model="new_product.title" maxlength="120" show-word-limit></el-input>
             </el-form-item>
+            <el-form-item label="新品" prop="is_new">
+              <el-switch v-model="new_product.is_new"></el-switch>
+            </el-form-item>
             <el-row type="flex" justify="space-between">
               <el-col>
                 <el-tag>产品属性</el-tag>
@@ -59,9 +62,7 @@
               :key="i"
               :label="`属性${i+1}`"
               :prop="'attrs.'+i+'.value'"
-              :rules="{
-      required: true, message: '属性不能为空', trigger: 'blur'
-    }"
+              :rules="{required: true, message: '属性不能为空', trigger: 'blur'}"
               style="position: relative"
             >
               <el-input v-model="item.value"></el-input>
@@ -144,6 +145,7 @@ export default class extends Vue {
   new_product = {
     category: NaN,
     title: '',
+    is_new: false,
     seo_title: '',
     seo_description: '',
     seo_keywords: '',
@@ -233,10 +235,12 @@ export default class extends Vue {
       const category: any = this.$route.params.category
       const attrs: any = this.$route.params.attrs
       const images: any = this.$route.params.images
+      const is_new: any = this.$route.params.is_new
 
       this.new_product = {
         category: category.id,
         title: this.$route.params.title,
+        is_new,
         seo_title: this.$route.params.seo_title,
         seo_description: this.$route.params.seo_description,
         seo_keywords: this.$route.params.seo_keywords,

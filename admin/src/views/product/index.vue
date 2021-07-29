@@ -18,6 +18,12 @@
           fit="cover"
         ></el-image>
       </template>
+      <template slot="title" slot-scope="scope">
+        <div>
+          <el-tag v-if="scope.row.is_new" size="mini" type="danger" hit>新品</el-tag>
+          <span>{{scope.row.title}}</span>
+        </div>
+      </template>
       <template slot-scope="scope" slot="menuLeft">
         <el-button
           type="primary"
@@ -77,8 +83,7 @@ export default class extends Vue {
       {
         label: '产品标题',
         prop: 'title',
-        addDisplay: false,
-        editDisplay: false
+        slot: true
       },
       {
         label: '产品分类',

@@ -49,7 +49,7 @@ export default class extends Vue {
   get activeMenu() {
     const route = this.$route
     const { meta, path } = route
-    if (meta.activeMenu) {
+    if(meta?.activeMenu) {
       return meta.activeMenu
     }
     return path
@@ -65,7 +65,8 @@ export default class extends Vue {
 .sidebar-container {
   // reset element-ui css
   .horizontal-collapse-transition {
-    transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
+    transition: 0s width ease-in-out, 0s padding-left ease-in-out,
+      0s padding-right ease-in-out;
   }
 
   .scrollbar-wrapper {
@@ -73,7 +74,7 @@ export default class extends Vue {
   }
 
   .el-scrollbar__view {
-    height: 100%
+    height: 100%;
   }
 
   .el-scrollbar__bar {
@@ -90,7 +91,7 @@ export default class extends Vue {
 
 <style lang="scss" scoped>
 .el-scrollbar {
-  height: 100%
+  height: 100%;
 }
 
 .el-menu {

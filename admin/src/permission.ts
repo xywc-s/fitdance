@@ -56,5 +56,5 @@ router.afterEach((to: Route) => {
   NProgress.done()
 
   // set page title
-  document.title = to.meta.title || 'Fitdance - 斐丹丝'
+  document.title = to?.meta?.title || 'Fitdance - 斐丹丝'
 })

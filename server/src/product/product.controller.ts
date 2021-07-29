@@ -19,6 +19,9 @@ export class ProductController {
       const [data, total] = await Product.findAndCount({
         'take': pageSize,
         'skip': page-1,
+        'order': {
+          'id': 'DESC'
+        }
       })
       
       return {
@@ -84,6 +87,7 @@ export class ProductController {
       }
       const images = await this.file.storeProductPictures(param.images)
       product.attrs = param.attrs
+      product.is_new = param.is_new
       product.title = param.title
       product.seo_title = param.seo_title
       product.seo_description = param.seo_description
