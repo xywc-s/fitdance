@@ -36,6 +36,7 @@ import { mapState } from 'vuex';
 export default {
   async fetch() {
     await this.$store.dispatch('getImages')
+    await this.$store.dispatch('getCategories')
   },
   computed: {
     ...mapState(['tel', 'qrcode'])

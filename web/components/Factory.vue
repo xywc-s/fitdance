@@ -38,8 +38,6 @@ export default {
   },
   methods: {
     videoControl() {
-      console.log(this.video);
-
       if (this.video.paused) {
         this.video.play()
         this.showIcon = false

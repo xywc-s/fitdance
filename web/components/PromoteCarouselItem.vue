@@ -83,11 +83,6 @@ export default {
     }
 
   },
-  watch: {
-    position(val, old_val) {
-      console.log(val, old_val);
-    }
-  },
   created() {
   }
 }

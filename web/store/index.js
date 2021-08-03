@@ -50,7 +50,16 @@ export const state = () => ({
   case: [],
   factory: [],
   process: [],
-  category: []
+  category: [],
+
+  // server data
+  categories: [],
+  categoryList: [],
+  currentCategory: null,
+
+  //产品列表
+  total: 0,
+  products: []
 })
 
 export const mutations = {
@@ -69,13 +78,17 @@ export const mutations = {
     } else if (direction === 'right') {
       state.isRightMinimizi = !state.isRightMinimizi
     }
+  },
+
+  set_data(state, { key, val }) {
+    state[key] = val
   }
 
 }
 
 export const actions = {
   async getImages({ commit }) {
-    const data = await this.$api.getImages()
+    const { data } = await this.$api.getImages()
     if (data.length > 0) {
       data.map(item => {
         switch (item.dir) {
@@ -114,5 +127,21 @@ export const actions = {
         }
       })
     }
+  },
+
+  async getCategories({ commit }) {
+    const { data } = await this.$api.getCategories()
+    commit('set_data', { key: 'categories', val: data })
+  },
+
+  async getCategory({ commit }, id) {
+    const { data } = await this.$api.getCategory(id)
+    commit('set_data', { key: 'currentCategory', val: data })
+  },
+
+  async getProducts({ commit }, filter) {
+    const { data, total } = await this.$api.getProducts(filter)
+    commit('set_data', { key: 'products', val: data })
+    commit('set_data', { key: 'total', val: total })
   }
 }

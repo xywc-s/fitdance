@@ -8,11 +8,9 @@
             <div class="ml-5">芭蕾分区</div>
           </div>
           <div class="body">
-            <div
-              class="menu px-3 font-14 color-3"
-              v-for="(item, i) in ['经典芭蕾', '热销芭蕾','专业芭蕾','半截芭蕾裙','吉普赛长裙']"
-              :key="i"
-            >{{item}}</div>
+            <v-list dense class="py-0 font-14 color-primary">
+              <CategoryList :categories="categories" :parents="[]"></CategoryList>
+            </v-list>
           </div>
         </div>
         <div class="new-publish mt-16">
@@ -20,14 +18,22 @@
             <div class="ml-5">新品发布</div>
           </div>
           <div class="body px-2">
-            <div
-              class="item d-flex align-center py-3"
-              v-for="(product,i) in new_publish_products"
-              :key="i"
+            <v-row
+              no-gutters
+              align="center"
+              class="d-flex flex-nowrap item py-3 pointer"
+              v-for="(product,i) in new_products"
+              :key="product.title"
+              @click="$router.push({path: `/ballet/details/prodct/${product.id}`})"
             >
-              <img :src="product" class="d-block" />
-              <div class="ml-3 color-3 font-12">蓝色芭蕾裙</div>
-            </div>
+              <v-img
+                aspect-ratio="1"
+                :width="83"
+                :max-width="83"
+                :src="product.mainImage||product.images[0].src"
+              />
+              <div class="ml-3 color-3 font-12" style="overflow-wrap: anywhere">{{product.title}}</div>
+            </v-row>
             <div class="btn my-3 font-14" @click="()=> $router.push('/about')">我要询盘</div>
           </div>
         </div>
@@ -57,26 +63,21 @@
 </template>
 
 <script>
-const new_publish_products = [
-  require('../../static/products/ballet/details/新品01.png'),
-  require('../../static/products/ballet/details/新品02.png'),
-  require('../../static/products/ballet/details/新品03.png'),
-  require('../../static/products/ballet/details/新品04.png'),
-  require('../../static/products/ballet/details/新品05.png'),
-  require('../../static/products/ballet/details/新品06.png'),
-  require('../../static/products/ballet/details/新品07.png')
-]
+import { mapState } from 'vuex'
 export default {
-  asyncData({ params }) {
-    console.log(params);
+  async asyncData({ $api }) {
+    const { data } = await $api.getProducts({ currentPage: 1, pageSize: 7, filters: { is_new: true } })
+    const new_products = data
+    return { new_products }
+  },
+  computed: {
+    ...mapState(['categories']),
   },
   data() {
     return {
-      new_publish_products,
       currentTab: 0
     }
-  },
-  watchQuery: ['page']
+  }
 }
 </script>
 

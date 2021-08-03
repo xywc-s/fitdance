@@ -28,10 +28,7 @@
         </v-col>
         <div class="bg-border"></div>
       </v-row>
-      <div
-        class="pointer color-primary text-right mt-2"
-        @click="()=> $router.push('/ballet/details')"
-      >
+      <div class="pointer color-primary text-right mt-2" @click="toDefaultList">
         <span class="btn-border">
           查看更多/
           <span class="font-12">MORE</span>
@@ -42,7 +39,7 @@
         <div class="d-flex justify-space-between align-end">
           <FTitle>专业芭蕾舞裙</FTitle>
           <div class="d-flex">
-            <div class="btn" @click="()=> $router.push('/ballet/details')">查看更多</div>
+            <div class="btn" @click="toDefaultList">查看更多</div>
             <div class="btn">我要定制</div>
           </div>
         </div>
@@ -79,7 +76,7 @@
           <div class="text-b">
             <div>芭蕾，于法国发展流行并逐渐职业化，十八世纪在法国日臻完美，到十九世纪末期，在俄罗斯进入最繁荣的时代</div>
           </div>
-          <div class="btn" @click="()=> $router.push('/ballet/details')">芭蕾专区</div>
+          <div class="btn" @click="toDefaultList">芭蕾专区</div>
         </div>
       </section>
 
@@ -91,7 +88,7 @@
 </template>
 
 <script>
-
+import { mapState } from 'vuex'
 const products = [
   require('../../static/products/ballet/show/产品01.png'),
   require('../../static/products/ballet/show/产品02.png'),
@@ -133,6 +130,15 @@ export default {
       products,
       liveShot,
       hotProducts
+    }
+  },
+  computed: {
+    ...mapState(['categories'])
+  },
+  methods: {
+    toDefaultList() {
+      this.$store.commit('set_data', { key: 'currentCategory', val: this.categories[0] })
+      this.$router.push({ path: `/ballet/details/${this.categories[0].id}`, query: { currentPage: 1, pageSize: 4 } })
     }
   }
 }
