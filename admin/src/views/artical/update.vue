@@ -63,7 +63,6 @@ export default class extends Vue {
   }
 
   async save() {
-    console.log(this.content);
     const params = {
       title: this.title,
       content: this.content

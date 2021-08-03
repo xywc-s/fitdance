@@ -67,10 +67,8 @@ export default class extends Vue {
   }
 
   private handleSuccess(response: any, file: any) {
-    console.log('upload file', file);
     this.cb_data.push(file.response.key)
     if(this.uploaded) {
-      console.log('uploaded');
       this.$emit('success-callback', this.cb_data)
       this.cb_data = []
       this.defaultFileList = []

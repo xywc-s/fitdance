@@ -64,10 +64,7 @@ export default class extends Vue {
   }
 
   async setSeo() {
-    //TODO: 发请求,成功后执行以下逻辑
     await updateSetting(this.new_seo)
-    console.log(this.new_seo);
-
     ProductModule.SET_SEO(this.new_seo)
     this.edit = false
   }

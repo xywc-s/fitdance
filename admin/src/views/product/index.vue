@@ -183,8 +183,6 @@ export default class extends Vue {
   }
 
   async created() {
-    console.log('created:', 1);
-
     const { data } = await getCategories()
     this.categoryNodes = data
 

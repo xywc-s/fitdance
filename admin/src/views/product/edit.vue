@@ -210,7 +210,6 @@ export default class extends Vue {
   }
 
   changeMainImage(file: any) {
-    console.log('file: ', file);
     if(file.status !== 'success')
       return this.$message.warning('当前产品图片还没上传，请先完成产品图片更新操作.')
     if(file.url === this.new_product.mainImage)

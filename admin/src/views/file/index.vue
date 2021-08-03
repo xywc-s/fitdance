@@ -61,8 +61,6 @@ export default class extends Vue {
   }
 
   async viewAlbum({ dir, files }: any) {
-    console.log('当前查看的相册是' + dir);
-    //跳转到详情，传递key
     FileModule.SET_FILES(files)
     this.$router.push(`/file/details?key=${dir}`)
   }
