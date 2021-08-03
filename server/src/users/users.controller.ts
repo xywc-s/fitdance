@@ -91,8 +91,6 @@ export class UsersController implements CrudController<User> {
   async delOne(@Query('id') id) {
     const user = await User.findOne(id)
     const res = await user.softRemove()
-    console.log(id);
-    console.log(res);
     return {
       code: 20000,
       data: res

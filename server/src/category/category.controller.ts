@@ -1,6 +1,6 @@
 import { Category } from '../models/category';
 import { CategoryService } from './category.service';
-import { Body, Controller, Delete, Get, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { CrudController } from '@nestjsx/crud';
 import { getRepository, getTreeRepository } from 'typeorm';
 
@@ -15,6 +15,15 @@ export class CategoryController implements CrudController<Category> {
   @Get('/')
   async getCategories(@Query() query){
     const res = await getTreeRepository(Category).findTrees()
+    return {
+      code: 20000,
+      data: res
+    }
+  }
+
+  @Get('/:id')
+  async getCategory(@Param('id') id){
+    const res = await Category.findOne(id)
     return {
       code: 20000,
       data: res

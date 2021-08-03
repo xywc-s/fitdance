@@ -54,8 +54,6 @@ export class ArticalsController implements CrudController<Artical> {
   async delOne(@Query('id') id) {
     const artical = await Artical.findOne(id)
     const res = await artical.softRemove()
-    console.log(id);
-    console.log(res);
     return {
       code: 20000,
       data: res

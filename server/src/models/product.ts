@@ -13,6 +13,12 @@ export class Product extends BaseModel {
   title: string
 
   @Column({
+    comment: '产品主图',
+    nullable: true
+  })
+  mainImage: string
+
+  @Column({
     comment: '产品属性',
     array: true
   })
