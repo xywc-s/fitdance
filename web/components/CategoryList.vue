@@ -66,7 +66,7 @@ export default {
     cat_id() {
       return this.$route.query.categoryId || 0
     }
-  }
+  },
   methods: {
     changeCategory(e, category) {
       e.preventDefault()
