@@ -1,6 +1,7 @@
 import Layout from '@/layout/index.vue'
 import Vue from 'vue'
 import Router from 'vue-router'
+import ProductEdit from '@/views/product/edit.vue'
 Vue.use(Router)
 
 /*
@@ -68,7 +69,7 @@ export default new Router({
         {
           path: 'manager/edit',
           name: 'product-edit',
-          component: ()=>import('@/views/product/edit.vue'),
+          component: ProductEdit,
           meta: {
             hidden: true,
             title: '产品编辑',

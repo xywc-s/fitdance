@@ -2,6 +2,8 @@ import request from '@/utils/request';
 
 export const getProducts = (params: any) => request.get('/products', {params})
 
+export const getProduct = (id: number) => request.get(`/products/${id}`)
+
 export const createProduct = (params: any) => request.post('/products', params)
 
 export const updateProduct = (params: any) => request.put('/products', params)
