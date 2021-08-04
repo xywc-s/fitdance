@@ -42,9 +42,9 @@ export class ProductController {
       if(Object.keys(queryFilters).length > 0) builder.where(queryFilters)
       const total = await builder.getCount()
       if(page !== 1 && total < page * pageSize){
-        builder.take(total-(pageSize*(page-1))).skip(page-1).orderBy('product.id', 'DESC')
+        builder.take(total-(pageSize*(page-1))).skip((page-1)*pageSize).orderBy('product.id', 'DESC')
       } else{
-        builder.take(pageSize).skip(page-1).orderBy('product.id', 'DESC')
+        builder.take(pageSize).skip((page-1)*pageSize).orderBy('product.id', 'DESC')
       }
       const data = await builder.getMany()
       return {
