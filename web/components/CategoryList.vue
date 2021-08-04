@@ -12,7 +12,7 @@
         prepend-icon
       >
         <template v-slot:activator>
-          <v-list-item-content>
+          <v-list-item-content @click.prevent.stop="changeCategory(category)">
             <v-list-item-title
               :class="[!!parents.length?`pl-${parents.length*3}`:'']"
               v-text="category.name"
@@ -35,7 +35,7 @@
         color="#d33266"
         class="pointer"
         :input-value="category.id == cat_id"
-        @click="changeCategory($event,category)"
+        @click.prevent.stop="changeCategory(category)"
       >
         <v-list-item-title
           :class="[1,2].includes(parents.length) ? 'pl-5' :`pl-${parents.length*3-4}`"
@@ -68,9 +68,7 @@ export default {
     }
   },
   methods: {
-    changeCategory(e, category) {
-      e.preventDefault()
-      e.stopPropagation()
+    changeCategory(category) {
       this.$store.commit('set_data', { key: 'categoryList', val: this.parents })
       this.$store.commit('set_data', { key: 'currentCategory', val: category })
       this.$router.push({ path: `/ballet/details/${category.id}`, query: { currentPage: 1, pageSize: 4 } })
