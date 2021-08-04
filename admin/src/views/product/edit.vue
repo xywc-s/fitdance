@@ -266,10 +266,12 @@ export default class extends Vue {
   }
 
   async created() {
+    const { data } = await getCategories()
+    this.categoryNodes = data
     if(!!this.product_id) {
       const { data } = await getProduct(this.product_id)
       this.new_product = {
-        category: data.id,
+        category: data.category.id,
         title: data.title,
         mainImage: data.mainImage,
         is_new: data.is_new,
@@ -282,8 +284,6 @@ export default class extends Vue {
       }
       this.images = data.images.map((item: any) => { return { name: item.filename, url: item.src } })
     }
-    const { data } = await getCategories()
-    this.categoryNodes = data
   }
 }
 </script>
