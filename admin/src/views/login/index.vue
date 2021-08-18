@@ -102,7 +102,6 @@ export default class extends Vue {
   @Watch('$route', { immediate: true })
   private onRouteChange(route: Route) {
     // TODO: remove the "as Dictionary<string>" hack after v4 release for vue-router
-    // See https://github.com/vuejs/vue-router/pull/2050 for details
     const query = route.query as Dictionary<string>
     if(query) {
       this.redirect = query.redirect
