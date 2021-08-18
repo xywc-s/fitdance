@@ -73,8 +73,8 @@ export default class extends Vue {
   data = []
 
   page = {
-    pageSize: 10,
-    currentPage: 1,
+    pageSize: this.$route.query.pageSize ? parseInt(this.$route.query.pageSize as string) : 10,
+    currentPage: this.$route.query.page ? parseInt(this.$route.query.page as string) : 1,
     total: 0
   }
 
@@ -145,7 +145,7 @@ export default class extends Vue {
   }
 
   async rowUpdate(row: any) {
-    this.$router.push({ name: 'product-edit', query: { id: row.id } })
+    this.$router.push({ name: 'product-edit', query: { id: row.id, page: this.page.currentPage.toString(), pageSize: this.page.pageSize.toString() } })
   }
 
   async rowDel(row: any) {
@@ -185,7 +185,6 @@ export default class extends Vue {
   async created() {
     const { data } = await getCategories()
     this.categoryNodes = data
-
   }
 }
 </script>

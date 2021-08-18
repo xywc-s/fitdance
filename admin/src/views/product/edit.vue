@@ -4,7 +4,7 @@
       <div style="position:relative">
         <div class="buttons">
           <el-tooltip content="返回" placement="right">
-            <el-button circle icon="el-icon-back" size="small" @click="$router.go(-1)"></el-button>
+            <el-button circle icon="el-icon-back" size="small" @click="backToListPage"></el-button>
           </el-tooltip>
           <!-- <el-tooltip effect="dark" content="清空" placement="left">
             <el-button circle icon="el-icon-close" type="danger" size="small" @click="clear"></el-button>
@@ -261,8 +261,12 @@ export default class extends Vue {
         })
         await createProduct(params)
       }
-      this.$router.go(-1)
+      this.backToListPage()
     }
+  }
+
+  backToListPage() {
+    this.$router.push({ name: 'product-list', query: { page: this.$route.query.page, pageSize: this.$route.query.pageSize } })
   }
 
   async created() {

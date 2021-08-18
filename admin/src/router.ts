@@ -60,6 +60,7 @@ export default new Router({
       children: [
         {
           path: 'manager',
+          name: 'product-list',
           component: ()=>import('@/views/product/index.vue'),
           meta: {
             title: '产品列表',
